@@ -1,1 +1,10 @@
 prontera,154,193,4	shop	ทดสอบร้านค้า	82,1146:-1,1245:-1
+
+prontera,156,193,4	script	ทดสอบช่องเก็บของเต็ม	84,{
+	freeloop(1);
+	for(.@i = 0; .@i < 200; .@i++){
+		getitem 501 + .@i,1;
+	}
+	freeloop(0);
+	end;
+}
