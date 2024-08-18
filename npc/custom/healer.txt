@@ -66,7 +66,7 @@ morocc,153,97,6	duplicate(Buff)	Buff#mor	909
 moscovia,220,191,4	duplicate(Buff)	Buff#mos	909
 niflheim,212,182,5	duplicate(Buff)	Buff#nif	909
 payon,179,106,4	duplicate(Buff)	Buff#pay	909
-prontera,162,193,4	duplicate(Buff)	Buff#prt	909
+prontera,154,198,4	duplicate(Buff)	Buff#prt	909
 rachel,125,116,6	duplicate(Buff)	Buff#rac	909
 splendide,201,153,4	duplicate(Buff)	Buff#spl	909
 thor_camp,249,74,4	duplicate(Buff)	Buff#thor	909
