@@ -10,7 +10,19 @@ prontera,160,190,4	script	ทดสอบช่องเก็บของเต็ม	84,{
 }
 
 prontera,150,185,4	script	ทดสอบ Pet	84,{
+	menu "ฟัก Poring",-,"เปลี่ยนความสนิทสนม",L_Love,"เปลี่ยนความหิว",L_Food;
 	makepet 1002;
+	sleep2 1;
 	birthpet;
+	end;
+	
+	L_Love:
+	input .@i;
+	atcommand "@petfriendly " + .@i;
+	end;
+	
+	L_Food:
+	input .@i;
+	atcommand "@pethungry " + .@i;
 	end;
 }
