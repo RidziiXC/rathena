@@ -1,3 +1,21 @@
+prontera,142,190,4	script	เติม AP	84,{
+	atcommand "@healap";
+	end;
+}
+
+prontera,144,190,4	script	เรียก Poring	84,{
+	atcommand "@monster 1002";
+	sc_start SC_ITEMBOOST,100000,10000;
+	end;
+}
+
+prontera,146,190,4	script	ลบ Buff	84,{
+	sc_end SC_ALL;
+	end;
+}
+
+prontera,148,190	monster	Dummy (Small)	21064,1
+
 prontera,150,190,4	shop	ทดสอบร้านค้า	84,1146:-1,1245:-1
 
 prontera,152,190,4	script	ทดสอบช่องเก็บของเต็ม	84,{
