@@ -106,3 +106,41 @@ prontera,156,190,4	script	ทดสอบอาชีพ	84,{
 	callfunc "F_GetPlatinumSkills";
 	end;
 }
+
+prontera,158,190,4	script	เสริมแกร่ง	84,{
+	refineui;
+	end;
+}
+
+prontera,162,190,4	script	รวมวัตถุดิบเสริมแกร่ง	84,{
+	for(.@i = 0; .@i < getarraysize(.refineItemRequirements$); .@i++){
+		getitem .refineItemRequirements$[.@i],1;
+	}
+	end;
+	
+OnInit:
+	setarray .refineItemRequirements$[0],"Phracon",
+	"Emveretarcon",
+	"Oridecon",
+	"Elunium",
+	"HD_Elunium",
+	"Enriched_Elunium",
+	"Carnium",
+	"HD_Carnium",
+	"Ethernium",
+	"Enriched_Ethernium",
+	"Etel_Carnium",
+	"HD_Ethernium",
+	"HD_Etel_Carnium",
+	"HD_Oridecon",
+	"Enriched_Oridecon",
+	"Bradium",
+	"HD_Bradium",
+	"Etherdeocon",
+	"Enriched_Etherdeocon",
+	"Etel_Bradium",
+	"HD_Etherdeocon",
+	"HD_Etel_Bradium",
+	"Blacksmith_Blessing";
+	end;
+}
