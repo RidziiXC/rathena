@@ -942,6 +942,8 @@ public:
 	s_macro_detect macro_detect;
 
 	std::vector<uint32> party_booking_requests;
+
+	uint16 debuff; // [Start's]
 };
 
 extern struct eri *pc_sc_display_ers; /// Player's SC display table

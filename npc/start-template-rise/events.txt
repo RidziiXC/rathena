@@ -10,5 +10,12 @@ OnPCLogoutEvent:
 	end;
 	
 OnInit:
+	bindatcmd "load",strnpcinfo(3) + "::OnLoad";
+	end;
+	
+OnLoad:
+	specialeffect2 35;
+	progressbar "",2;
+	warp "Save",0,0;
 	end;
 }
