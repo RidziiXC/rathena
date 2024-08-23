@@ -3155,6 +3155,7 @@ static bool is_attack_hitting(struct Damage* wd, struct block_list *src, struct 
 	status_change *sc = status_get_sc(src);
 	status_change *tsc = status_get_sc(target);
 	map_session_data *sd = BL_CAST(BL_PC, src);
+	map_session_data *tsd = BL_CAST(BL_PC, target);
 	std::bitset<NK_MAX> nk = battle_skill_get_damage_properties(skill_id, wd->miscflag);
 	short flee, hitrate;
 
@@ -3187,6 +3188,9 @@ static bool is_attack_hitting(struct Damage* wd, struct block_list *src, struct 
 
 	if(battle_config.agi_penalty_type && battle_config.agi_penalty_target&target->type) {
 		unsigned char attacker_count = unit_counttargeted(target); //256 max targets should be a sane max
+
+		if (tsd && (tsd->debuff > 0))
+			flee = (flee * (100 - (cap_value(tsd->debuff, 0, 100)))) / 100; // [Start's] Example: Debuff 50 will decrease flee by 50%
 
 		if(attacker_count >= battle_config.agi_penalty_count) {
 			if (battle_config.agi_penalty_type == 1)
@@ -6632,6 +6636,12 @@ static void battle_calc_defense_reduction(struct Damage* wd, struct block_list *
 				def2 -= (target_count - (battle_config.vit_penalty_count - 1))*battle_config.vit_penalty_num;
 			}
 		}
+
+		if (tsd && (tsd->debuff > 0)) {
+			def1 = (def1 * (100 - (cap_value(tsd->debuff, 0, 100)))) / 100; // [Start's] Example: Debuff 50 will decrease def1 by 50%
+			def2 = (def2 * (100 - (cap_value(tsd->debuff, 0, 100)))) / 100; // [Start's] Example: Debuff 50 will decrease def2 by 50%
+		}
+
 		if(def2 < 1)
 			def2 = 1;
 	}
@@ -7372,8 +7382,8 @@ static struct Damage battle_calc_weapon_attack(struct block_list *src, struct bl
 	sd = BL_CAST(BL_PC, src);
 	tsd = BL_CAST(BL_PC, target);
 
-	//Check for Lucky Dodge
-	if ((!skill_id || skill_id == PA_SACRIFICE) && tstatus->flee2 && rnd()%1000 < tstatus->flee2) {
+	//Check for Lucky Dodge + [Start's] Reduces Perfect Dodge by debuff (Example: Debuff 50 will decrease Perfect Dodge by 50%)
+	if ((!skill_id || (skill_id == PA_SACRIFICE)) && tstatus->flee2 && ((rnd()%1000) < (tstatus->flee2 - (tsd ? (tstatus->flee2 * tsd->debuff) / 100 : 0)))) {
 		wd.type = DMG_LUCY_DODGE;
 		wd.dmg_lv = ATK_LUCKY;
 		if(wd.div_ < 0)

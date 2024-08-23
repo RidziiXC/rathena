@@ -39,7 +39,7 @@ ACMD_FUNC(debuff)
 
 	StringBuf buf;
 	StringBuf_Init(&buf);
-	StringBuf_Printf(&buf, msg_txt(sd,1536), value); // Debuff: %d
+	StringBuf_Printf(&buf, msg_txt(sd,1536), sd->debuff); // Debuff: %d
 	clif_displaymessage(fd, StringBuf_Value(&buf));
 	StringBuf_Destroy(&buf);
 
