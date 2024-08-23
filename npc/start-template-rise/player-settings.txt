@@ -1,0 +1,27 @@
+prontera,156,188,4	script	ตั้งค่า	84,{
+	L_Menu:
+	menu
+	"ดูคำสั่งที่ใช้ได้",L_Commands,
+	"ใช้ @autoloot เมื่อเข้าเกม [" + (isAutoLootOff ? "OFF" : "ON") + "]",L_AutoLoot
+	;
+	end;
+	
+	L_Commands:
+	mes "• @mobinfo";
+	mes "• @iteminfo";
+	mes "• @whodrops";
+	mes "• @time";
+	mes "• @showexp";
+	mes "• @autoloot";
+	mes "• @alootid";
+	mes "• @autoloottype";
+	mes "• @autotrade";
+	mes "• @who";
+	next;
+	goto L_Menu;
+	
+	L_AutoLoot:
+	isAutoLootOff = !isAutoLootOff;
+	message strcharinfo(0),"ใช้ @autoloot เมื่อเข้าเกม [" + (isAutoLootOff ? "OFF" : "ON") + "]";
+	goto L_Menu;
+}

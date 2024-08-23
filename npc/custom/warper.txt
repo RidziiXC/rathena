@@ -35,7 +35,7 @@ menu	"Warp ล่าสุด ^777777["+lastwarp$+"]^000000",-,
 	if (lastwarp$ == "")
 		message strcharinfo(0),"เกิดข้อผิดพลาด: ยังไม่เคย Warp ไปไหนมาก่อน";
 	else
-		warp lastwarp$,lastwarpx,lastwarpy;
+		warp lastwarp$,0,0;
 	end;
 
 // ------------------- Functions -------------------
@@ -63,50 +63,49 @@ menu	"Warp ล่าสุด ^777777["+lastwarp$+"]^000000",-,
 // --------------------------------------------------
 
 function Go {
-	set lastwarp$, getarg(0);
-	set lastwarpx, getarg(1,0);
-	set lastwarpy, getarg(2,0);
-	warp getarg(0),getarg(1,0),getarg(2,0);
+	lastwarp$ = getarg(0);
+	warp getarg(0),0,0;
 	end;
 }
 function Disp {
 	if (getargcount() < 3)
-		set @menu$, getarg(0);
+		@menu$ = getarg(0);
 	else {
-		set @menu$,"";
-		for (set .@i,getarg(1); .@i<=getarg(2); set .@i,.@i+1)
-			set @menu$, @menu$+getarg(0)+" "+.@i+":";
+		@menu$ = "";
+		for (.@i = getarg(1); .@i <= getarg(2); .@i = (.@i + 1))
+			@menu$ = @menu$ + getarg(0) + " " + .@i + ":";
 	}
 	return;
 }
 function Pick {
-	set .@warp_block,@warp_block;
-	set @warp_block,0;
+	.@warp_block = @warp_block;
+	@warp_block = 0;
 	if((@f && .OnlyFirstFld) || (@d && .OnlyFirstDun)){
-		set .@select,1;
+		.@select = 1;
 		if(.@warp_block){
 			while(.@warp_block & (1<<.@select)){
 				.@select += 1;
 			}
 		}
 	}else{
-		set .@select, select(@menu$);
+		.@select = select(@menu$);
 	}
 	if (getarg(0) == "") {
-		set .@i, .@select;
-		set .@map$, getarg(.@i);
+		.@i = .@select;
+		.@map$ = getarg(.@i);
 	} else {
-		set .@i, .@select-getarg(1,0);
-		set .@map$, getarg(0)+((.@i<10)?"0":"")+.@i;
+		.@i = .@select - getarg(1,0);
+		.@map$ = getarg(0) + ((.@i < 10) ? "0" : "") + .@i;
 	}
 	if (.@warp_block & (1<<.@select)) {
-		message strcharinfo(0),"This map is not enabled in "+((checkre(0))?"":"Pre-")+"Renewal.";
+		message strcharinfo(0),"Map ดังกล่าวไม่เปิดใช้งานใน " + ((checkre(0)) ? "" : "Pre-") + "Renewal";
 		end;
 	}
-	set .@x, @c[.@i*2];
-	set .@y, @c[.@i*2+1];
+	.@x = @c[.@i * 2];
+	.@y = @c[.@i * 2 + 1];
 	deletearray @c[0],getarraysize(@c);
-	@f = false; @d = false;
+	@f = false;
+	@d = false;
 	Go(.@map$,.@x,.@y);
 }
 function Restrict {
@@ -121,13 +120,13 @@ function Restrict {
 		.@type$ = "RE";
 	}
 
-	if ((.@type$ == "RE" && !checkre(0)) || (.@type$ == "Pre-RE" && checkre(0))) {
+	if (((.@type$ == "RE") && !checkre(0)) || ((.@type$ == "Pre-RE") && checkre(0))) {
 		if (getarg(1,0)) {
-			set @warp_block,0;
-			for (set .@i,1; .@i<getargcount(); set .@i,.@i+1)
-				set @warp_block, @warp_block | (1<<getarg(.@i));
+			@warp_block = 0;
+			for (.@i = 1; .@i < getargcount(); .@i = (.@i + 1))
+				@warp_block = @warp_block | (1<<getarg(.@i));
 		} else {
-			message strcharinfo(0),"This map is not enabled in "+((checkre(0))?"":"Pre-")+"Renewal.";
+			message strcharinfo(0),"Map ดังกล่าวไม่เปิดใช้งานใน " + ((checkre(0)) ? "" : "Pre-") + "Renewal";
 			end;
 		}
 	}

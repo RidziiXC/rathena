@@ -1,0 +1,16 @@
+function	script	Cap	{ return cap_value(getarg(0,0) + getarg(1,0),0,INT_MAX); }
+
+function	script	IsZenyExceed	{
+	.@isZenyExceed = (Cap(Zeny,getarg(0,0)) > 2000000000);
+	if(.@isZenyExceed)
+	message strcharinfo(0),"เกิดข้อผิดพลาด: Zeny เต็มแล้ว";
+	return .@isZenyExceed;
+}
+
+function	script	ChangeZeny	{
+	.@value = getarg(0,0);
+	.@isIncrease = (.@value >= 0);
+	Zeny = Cap(Zeny,.@value);
+	message strcharinfo(0),(.@isIncrease ? "+" : "") + F_InsertComma(.@value) + "z เป็น " + F_InsertComma(Zeny) + "z";
+	return;
+}

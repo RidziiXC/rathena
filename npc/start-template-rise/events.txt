@@ -1,0 +1,14 @@
+-	script	Events	-1,{
+	end;
+	
+OnPCLoginEvent:
+	if(!isAutoLootOff)
+	atcommand "@autoloot";
+	end;
+	
+OnPCLogoutEvent:
+	end;
+	
+OnInit:
+	end;
+}
