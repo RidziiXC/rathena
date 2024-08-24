@@ -2,7 +2,7 @@ prontera,156,188,4	script	ตั้งค่า	84,{
 	L_Menu:
 	menu
 	"ดูคำสั่งที่ใช้ได้",L_Commands,
-	"ใช้ @autoloot เมื่อเข้าเกม [" + (isAutoLootOff ? "OFF" : "ON") + "]",L_AutoLoot
+	"ใช้ @autoloot เมื่อเข้าเกม [" + (isAutoLootOff ? "^d32323OFF^000000" : "^1c9311ON^000000") + "]",L_AutoLoot
 	;
 	end;
 	

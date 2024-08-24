@@ -113,12 +113,17 @@ prontera,158,190,4	script	เสริมแกร่ง	84,{
 	menu
 	"เสริมแกร่ง",-
 	,"เสริมแกร่งด้วย Random Option",L_RandomOption
+	,"เสริมแกร่งด้วย Grade",L_Grade
 	;
 	refineui;
 	end;
 	
 	L_RandomOption:
 	RandomOption();
+	end;
+	
+	L_Grade:
+	EnchantGrade();
 	end;
 }
 

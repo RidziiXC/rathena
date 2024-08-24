@@ -48,12 +48,12 @@ function	script	RandomOption	{
 	if(findRandomOptionId)
 	.@findRandomOptionDesc$ = " จนกว่าจะเจอ " + .@randomOptionLists$[RandomOptionIdCorrectionForDesc(findRandomOptionId)] + " +" + .@minValue + "~" + .@maxValue;
 	menu
-	"สุ่ม 5 แถว แต่ละแถว +" + .@minValue + "~" + .@maxValue + " (ไม่สามารถใช้ระบบสุ่มจนกว่าจะเจอได้) [" + F_InsertComma(.@normalPrice) + "z]",L_Normal
-	,"สุ่มแถวที่ 1" + .@findRandomOptionDesc$ + " [" + F_InsertComma(.@selectedIndexPrice) + "z]",L_Index0
-	,"สุ่มแถวที่ 2" + .@findRandomOptionDesc$ + " [" + F_InsertComma(.@selectedIndexPrice) + "z]",L_Index1
-	,"สุ่มแถวที่ 3" + .@findRandomOptionDesc$ + " [" + F_InsertComma(.@selectedIndexPrice) + "z]",L_Index2
-	,"สุ่มแถวที่ 4" + .@findRandomOptionDesc$ + " [" + F_InsertComma(.@selectedIndexPrice) + "z]",L_Index3
-	,"สุ่มแถวที่ 5" + .@findRandomOptionDesc$ + " [" + F_InsertComma(.@selectedIndexPrice) + "z]",L_Index4
+	"สุ่ม 5 แถว แต่ละแถว +" + .@minValue + "~" + .@maxValue + " (ไม่สามารถใช้ระบบสุ่มจนกว่าจะเจอได้) [^af1ada" + F_InsertComma(.@normalPrice) + "z^000000]",L_Normal
+	,"สุ่มแถวที่ 1" + .@findRandomOptionDesc$ + " [^af1ada" + F_InsertComma(.@selectedIndexPrice) + "z^000000]",L_Index0
+	,"สุ่มแถวที่ 2" + .@findRandomOptionDesc$ + " [^af1ada" + F_InsertComma(.@selectedIndexPrice) + "z^000000]",L_Index1
+	,"สุ่มแถวที่ 3" + .@findRandomOptionDesc$ + " [^af1ada" + F_InsertComma(.@selectedIndexPrice) + "z^000000]",L_Index2
+	,"สุ่มแถวที่ 4" + .@findRandomOptionDesc$ + " [^af1ada" + F_InsertComma(.@selectedIndexPrice) + "z^000000]",L_Index3
+	,"สุ่มแถวที่ 5" + .@findRandomOptionDesc$ + " [^af1ada" + F_InsertComma(.@selectedIndexPrice) + "z^000000]",L_Index4
 	,"ตั้งค่าสุ่มจนกว่าจะเจอ",L_FindRandomOptionId
 	;
 	
@@ -116,7 +116,7 @@ function	script	RandomOption	{
 		continue;
 		
 		if(getequipisequiped(.@i)){
-			.@menu$ = .@menu$ + F_getpositionname(.@i) + "-[" + getequipname(.@i) + "]";
+			.@menu$ = .@menu$ + F_getpositionname(.@i) + " - [" + getequipname(.@i) + "]";
 			.@isEquiped = 1;
 		}
 		.@menu$ = .@menu$ + ":";
@@ -194,4 +194,126 @@ function	script	RandomOption	{
 		ChangeZeny(-.@selectedIndexPrice);
 	}
 	close;
+}
+
+function	script	GetGradeWording	{
+	.@grade = getarg(0,0);
+	if(.@grade == 1)
+	return "^f34f4fD^000000";
+	else if(.@grade == 2)
+	return "^a77a00C^000000";
+	else if(.@grade == 3)
+	return "^82c764B^000000";
+	else if(.@grade == 4)
+	return "^7b7b7bA^000000";
+	else
+	return "-";
+}
+
+function	script	GetEquipmentLocationConstant	{
+	.@location = getarg(0,0);
+	if(.@location == EQI_ACC_L)
+	return 128;
+	else if(.@location == EQI_ACC_R)
+	return 8;
+	else if(.@location == EQI_SHOES)
+	return 64;
+	else if(.@location == EQI_GARMENT)
+	return 4;
+	else if(.@location == EQI_HEAD_LOW)
+	return 1;
+	else if(.@location == EQI_HEAD_MID)
+	return 512;
+	else if(.@location == EQI_HEAD_TOP)
+	return 256;
+	else if(.@location == EQI_ARMOR)
+	return 16;
+	else if(.@location == EQI_HAND_L)
+	return 32;
+	else if(.@location == EQI_HAND_R)
+	return 2;
+	else if(.@location == EQI_COSTUME_HEAD_TOP)
+	return 1024;
+	else if(.@location == EQI_COSTUME_HEAD_MID)
+	return 2048;
+	else if(.@location == EQI_COSTUME_HEAD_LOW)
+	return 4096;
+	else if(.@location == EQI_COSTUME_GARMENT)
+	return 8192;
+	else if(.@location == EQI_SHADOW_ARMOR)
+	return 65536;
+	else if(.@location == EQI_SHADOW_WEAPON)
+	return 131072;
+	else if(.@location == EQI_SHADOW_SHIELD)
+	return 262144;
+	else if(.@location == EQI_SHADOW_SHOES)
+	return 524288;
+	else if(.@location == EQI_SHADOW_ACC_R)
+	return 1048576;
+	else if(.@location == EQI_SHADOW_ACC_L)
+	return 2097152;
+	else
+	return 0;
+}
+
+function	script	EnchantGrade	{
+	disable_items;
+	setarray .@prices[0],10000,100000,1000000,10000000;
+	.@selectedGrade = select(GetGradeWording(1) + " [^af1ada" + F_InsertComma(.@prices[0]) + "z^000000]:" + GetGradeWording(2) + " [^af1ada" + F_InsertComma(.@prices[1]) + "z^000000]:" + GetGradeWording(3) + " [^af1ada" + F_InsertComma(.@prices[2]) + "z^000000]:" + GetGradeWording(4) + " [^af1ada" + F_InsertComma(.@prices[3]) + "z^000000]");
+	for(.@i = 0; .@i < 21; .@i++){
+		if(.@i == 14) // Ammo
+		continue;
+		
+		if(getequipisequiped(.@i)){
+			.@menu$ = .@menu$ + F_getpositionname(.@i) + " - [" + getequipname(.@i) + "] Grade " + GetGradeWording(getenchantgrade(.@i));
+			.@isEquiped = 1;
+		}
+		.@menu$ = .@menu$ + ":";
+	}
+	
+	if(!.@isEquiped){
+		mes "คุณไม่ได้สวมใส่อุปกรณ์ใด ๆ อยู่เลย";
+		close;
+	}
+	
+	.@location = (select(.@menu$) - 1);
+	if(.@location >= 14)
+	.@location++;
+
+	if(!getequipisequiped(.@location)){
+		mes "คุณไม่ได้สวมใส่อุปกรณ์ใด ๆ อยู่";
+		close;
+	}
+
+	.@selectedItemId = getequipid(.@location);
+	.@refineCount = getequiprefinerycnt(.@location);
+	setarray .@cards[0],getequipcardid(.@location,0),getequipcardid(.@location,1),getequipcardid(.@location,2),getequipcardid(.@location,3);
+	
+	if(callfunc("F_IsEquipIDHack",.@location,.@selectedItemId) || callfunc("F_IsEquipCardHack",.@location,.@cards[0],.@cards[1],.@cards[2],.@cards[3]) || callfunc("F_IsEquipRefineHack",.@location,.@refineCount)){
+		mes "อุปกรณ์มีการเปลี่ยนแปลง โปรดทำรายการใหม่อีกครั้ง";
+		close;
+	}
+
+	.@oldGrade = getenchantgrade(.@location);
+	
+	if(.@oldGrade >= .@selectedGrade){
+		mes "Grade อุปกรณ์ดังกล่าว สูงเกินกว่าที่เลือก";
+		close;
+	}
+	
+	.@price = .@prices[(.@selectedGrade - 1)];
+	
+	if(Zeny < .@price){
+		mes "Zeny ไม่เพียงพอ";
+		close;
+	}
+	
+	.@locationConstant = GetEquipmentLocationConstant(.@location);
+	.@plusGrade = (.@selectedGrade - .@oldGrade);
+	
+	atcommand "@grade " + .@locationConstant + " +" + .@plusGrade;
+	
+	ChangeZeny(-.@price);
+	
+	end;
 }
