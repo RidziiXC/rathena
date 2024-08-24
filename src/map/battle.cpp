@@ -2227,7 +2227,7 @@ int64 battle_calc_debuff_damage(struct block_list* src, struct block_list* bl, i
 
 	mob_data* md = BL_CAST(BL_MOB, src);
 	if (md && (md->rank != 0))
-		damage = i64max((damage * (100 + md->rank)) / 100, 1); // Example: Rank 1 will increase damage by 10% (Rank 100 == x2 Damage, Rank 1000 == x20 Damage)
+		damage = i64max((damage * (100 + md->rank)) / 100, 1); // Example: Rank 1 will increase damage by 1% (Rank 100 == x2 Damage, Rank 1000 == x20 Damage)
 
 	return i64max(damage, 1);
 }

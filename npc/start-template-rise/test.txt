@@ -5,8 +5,8 @@ prontera,142,190,4	script	เติม AP	84,{
 
 prontera,144,190,4	script	เรียก Poring	84,{
 	monster "prontera",148,186,"--ja--",1002,1;
-	setunitdata $@mobid[0],UMOB_RANK,0;
-	setunitdata $@mobid[0],UMOB_HIT,1000;
+	//setunitdata $@mobid[0],UMOB_RANK,0;
+	//setunitdata $@mobid[0],UMOB_HIT,1000;
 	sc_start SC_ITEMBOOST,100000,10000;
 	end;
 }

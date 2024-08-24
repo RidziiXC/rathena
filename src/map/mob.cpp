@@ -1186,6 +1186,7 @@ int mob_spawn (struct mob_data *md)
 	md->last_pcneartime = 0;
 	md->last_canmove = tick;
 	md->last_skillcheck = 0;
+	md->rank = rnd() % 91; // [Start's] Rank 0~90
 
 	t_tick c = tick - MOB_MAX_DELAY;
 
