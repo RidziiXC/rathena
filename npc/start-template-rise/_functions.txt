@@ -17,15 +17,25 @@ function	script	ChangeZeny	{
 
 function	script	RandomOptionIdCorrectionForDesc	{
 	.@idCorrection = getarg(0,0);
-	
 	if(.@idCorrection >= 204)
 	.@idCorrection -= 2;
 	if(.@idCorrection >= 173)
 	.@idCorrection -= 2;
 	if(.@idCorrection >= 86)
 	.@idCorrection--;
-
 	return (.@idCorrection - 1);
+}
+
+function	script	IsRandomOptionIdError	{
+	.@randomOptionId = getarg(0,0);
+	return ((.@randomOptionId == 86) || (.@randomOptionId == 173) || (.@randomOptionId == 174) || (.@randomOptionId == 204) || (.@randomOptionId == 205) || ((.@randomOptionId >= 76) && (.@randomOptionId <= 85)) || ((.@randomOptionId >= 175) && (.@randomOptionId <= 184)));
+}
+
+function	script	GetRandomOptionId	{
+	.@randomOptionId = rand(1,254);
+	while(IsRandomOptionIdError(.@randomOptionId))
+	.@randomOptionId = rand(1,254);
+	return .@randomOptionId;
 }
 
 function	script	RandomOption	{
@@ -60,12 +70,13 @@ function	script	RandomOption	{
 	freeloop(0);
 	next;
 	input .@i;
-	if(.@i <= 0 || .@i >= 255){
+	if(IsRandomOptionIdError(.@i))
+	mes "Option ดังกล่าวไม่เปิดให้ใช้งาน";
+	else if((.@i <= 0) || (.@i >= 255)){
 		findRandomOptionId = 0;
 		mes "ยกเลิกระบบสุ่มจนกว่าจะเจอเรียบร้อยแล้ว";
 	}
 	else{
-		
 		findRandomOptionId = .@i;
 		mes "ตั้งค่าสุ่มจนกว่าจะเจอ " + .@randomOptionLists$[RandomOptionIdCorrectionForDesc(findRandomOptionId)] + " เรียบร้อยแล้ว";
 	}
@@ -125,9 +136,7 @@ function	script	RandomOption	{
 	.@refineCount = getequiprefinerycnt(.@part);
 	setarray .@cards[0],getequipcardid(.@part,0),getequipcardid(.@part,1),getequipcardid(.@part,2),getequipcardid(.@part,3);
 
-	if(callfunc("F_IsEquipIDHack",.@part,.@selectedItemId)
-			|| callfunc("F_IsEquipCardHack",.@part,.@cards[0],.@cards[1],.@cards[2],.@cards[3])
-			|| callfunc("F_IsEquipRefineHack",.@part,.@refineCount)){
+	if(callfunc("F_IsEquipIDHack",.@part,.@selectedItemId) || callfunc("F_IsEquipCardHack",.@part,.@cards[0],.@cards[1],.@cards[2],.@cards[3]) || callfunc("F_IsEquipRefineHack",.@part,.@refineCount)){
 		mes "อุปกรณ์มีการเปลี่ยนแปลง โปรดทำรายการใหม่อีกครั้ง";
 		close;
 	}
