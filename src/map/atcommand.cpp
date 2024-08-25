@@ -7887,16 +7887,20 @@ ACMD_FUNC(mobinfo)
 					continue;
 
 				//Because if there are 3 MVP drops at 50%, the first has a chance of 50%, the second 25% and the third 12.5%
-				mvppercent = (float)mob->mvpitem[i].rate * mvpremain / 10000.0f;
+				//mvppercent = (float)mob->mvpitem[i].rate * mvpremain / 10000.0f;
+				mvppercent = mob_getdroprate(&sd->bl, mob, mob->mvpitem[i].rate, drop_modifier); // [Start's] MvP drop rate also increased by buff
+
 				if(battle_config.item_drop_mvp_mode == 0) {
 					mvpremain -= mvppercent;
 				}
 				if (mvppercent > 0) {
 					j++;
 					if (j == 1) {
-						sprintf(atcmd_output2, " %s  %02.02f%%", item_db.create_item_link( id ).c_str(), mvppercent);
+						//sprintf(atcmd_output2, " %s  %02.02f%%", item_db.create_item_link( id ).c_str(), mvppercent);
+						sprintf(atcmd_output2, " %s  %02.02f%%", item_db.create_item_link( id ).c_str(), (float)mvppercent / 100);
 					} else {
-						sprintf(atcmd_output2, " - %s  %02.02f%%", item_db.create_item_link( id ).c_str(), mvppercent);
+						//sprintf(atcmd_output2, " - %s  %02.02f%%", item_db.create_item_link( id ).c_str(), mvppercent);
+						sprintf(atcmd_output2, " - %s  %02.02f%%", item_db.create_item_link( id ).c_str(), (float)mvppercent / 100);
 					}
 					strcat(atcmd_output, atcmd_output2);
 				}

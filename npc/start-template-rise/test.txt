@@ -7,12 +7,15 @@ prontera,144,190,4	script	เรียก Poring	84,{
 	monster "prontera",148,186,"--ja--",1002,1;
 	//setunitdata $@mobid[0],UMOB_RANK,0;
 	//setunitdata $@mobid[0],UMOB_HIT,1000;
+	sc_start SC_EXPBOOST,100000,10000;
 	sc_start SC_ITEMBOOST,100000,10000;
 	end;
 }
 
 prontera,146,190,4	script	ลบ Buff	84,{
 	sc_end SC_ALL;
+	sc_end SC_EXPBOOST;
+	sc_end SC_ITEMBOOST;
 	end;
 }
 

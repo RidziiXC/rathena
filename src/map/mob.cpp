@@ -3122,7 +3122,12 @@ int mob_dead(struct mob_data *md, struct block_list *src, int type)
 				if (i_data == nullptr)
 					continue;
 
-				temp = mdrop[i].rate;
+				//temp = mdrop[i].rate;
+
+				// [Start's] MvP drop rate also increased by buff
+				temp = mob_getdroprate(src, md->db, mdrop[i].rate, 100, md);
+				if (md->rank)
+					temp = (temp * (100 + md->rank)) / 100; // [Start's] Example: Rank 100 will increase drop rate by 100% (Or x2)
 
 #if defined(RENEWAL_DROP)
 				temp = cap_value( apply_rate( temp, penalty ), 0, 10000 );
@@ -4417,7 +4422,7 @@ const std::string MobDatabase::getDefaultLocation() {
 	return std::string(db_path) + "/mob_db.yml";
 }
 
-bool MobDatabase::parseDropNode(std::string nodeName, const ryml::NodeRef& node, uint8 max, s_mob_drop *drops) {
+bool MobDatabase::parseDropNode(std::string nodeName, const ryml::NodeRef& node, uint8 max, s_mob_drop *drops, int monsterLv, bool isMvp) {
 	const auto& dropNode = node[c4::to_csubstr(nodeName)];
 	uint16 i;
 
@@ -4427,6 +4432,8 @@ bool MobDatabase::parseDropNode(std::string nodeName, const ryml::NodeRef& node,
 			break;
 		}
 	}
+
+	uint16 lastIndex;
 
 	for (const auto& dropit : dropNode) {
 		uint16 index;
@@ -4447,6 +4454,8 @@ bool MobDatabase::parseDropNode(std::string nodeName, const ryml::NodeRef& node,
 				continue;
 			}
 		}
+
+		lastIndex = index + 1;
 
 		std::string item_name;
 
@@ -4488,6 +4497,24 @@ bool MobDatabase::parseDropNode(std::string nodeName, const ryml::NodeRef& node,
 		drops[index].rate = rate;
 		drops[index].steal_protected = steal;
 		drops[index].randomopt_group = group;
+
+		
+	}
+
+	if (!isMvp && (lastIndex < MAX_MOB_DROP_TOTAL)) {
+		drops[lastIndex].nameid = 10000001;
+		drops[lastIndex].rate = (1 * monsterLv);
+		drops[lastIndex].steal_protected = true;
+		drops[lastIndex].randomopt_group = 0;
+	}
+
+	lastIndex++;
+	if (isMvp && (lastIndex < MAX_MVP_DROP_TOTAL)) {
+
+		drops[lastIndex].nameid = 10000000;
+		drops[lastIndex].rate = 1;
+		drops[lastIndex].steal_protected = true;
+		drops[lastIndex].randomopt_group = 0;
 	}
 
 	return true;
@@ -5043,12 +5070,12 @@ uint64 MobDatabase::parseBodyNode(const ryml::NodeRef& node) {
 	}
 
 	if (this->nodeExists(node, "MvpDrops")) {
-		if (!this->parseDropNode("MvpDrops", node, MAX_MVP_DROP, mob->mvpitem))
+		if (!this->parseDropNode("MvpDrops", node, MAX_MVP_DROP, mob->mvpitem, mob->lv, true))
 			return 0;
 	}
 
 	if (this->nodeExists(node, "Drops")) {
-		if (!this->parseDropNode("Drops", node, MAX_MOB_DROP, mob->dropitem))
+		if (!this->parseDropNode("Drops", node, MAX_MOB_DROP, mob->dropitem, mob->lv, false))
 			return 0;
 	}
 

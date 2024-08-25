@@ -94,3 +94,8 @@ Body:
     Name: Refine Hack Powder
     Type: Etc
     Buy: 1
+  - Id: 10000001
+    AegisName: Wishing_Ticket
+    Name: Wishing Ticket
+    Type: Etc
+    Buy: 1
