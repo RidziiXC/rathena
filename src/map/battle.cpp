@@ -811,10 +811,10 @@ int battle_calc_cardfix(int attack_type, struct block_list *src, struct block_li
 				if( tsd->sc.getSCE(SC_MDEF_RATE) )
 					cardfix = cardfix * (100 - tsd->sc.getSCE(SC_MDEF_RATE)->val1) / 100;
 
-				if (md && ((rnd() % 100) < cap_value(md->rank / 10,1,50))) // [Start's] Monster have (Rank / 10)% (Maximum 50% or Rank 500) chance to skip damage reduction rate
-					cardfix = 1000;
-				else if (!md && ((rnd() % 100) < 10)) // [Start's] PvP have 10% chance to skip damage reduction rate
-					cardfix = 1000;
+				if (md && (cardfix < 100) && ((rnd() % 100) < cap_value(md->rank, 1, 50))) // [Start's] Monster have (Rank)% (Maximum 50%) chance to capped rate at 90% if exceeded
+					cardfix = 100;
+				else if (!md && (cardfix < 100) && ((rnd() % 100) < 50)) // [Start's] PvP have 50% chance to capped rate at 90% if exceeded
+					cardfix = 100;
 
 				APPLY_CARDFIX(damage, cardfix);
 			}
@@ -1036,10 +1036,10 @@ int battle_calc_cardfix(int attack_type, struct block_list *src, struct block_li
 				if( tsd->sc.getSCE(SC_DEF_RATE) )
 					cardfix = cardfix * (100 - tsd->sc.getSCE(SC_DEF_RATE)->val1) / 100;
 
-				if (md && ((rnd() % 100) < cap_value(md->rank / 10, 1, 50))) // [Start's] Monster have (Rank / 10)% (Maximum 50% or Rank 500) chance to skip damage reduction rate
-					cardfix = 1000;
-				else if (!md && ((rnd() % 100) < 10)) // [Start's] PvP have 10% chance to skip damage reduction rate
-					cardfix = 1000;
+				if (md && (cardfix < 100) && ((rnd() % 100) < cap_value(md->rank, 1, 50))) // [Start's] Monster have (Rank)% (Maximum 50%) chance to capped rate at 90% if exceeded
+					cardfix = 100;
+				else if (!md && (cardfix < 100) && ((rnd() % 100) < 50)) // [Start's] PvP have 50% chance to capped rate at 90% if exceeded
+					cardfix = 100;
 
 				APPLY_CARDFIX(damage, cardfix);
 			}
@@ -1087,10 +1087,10 @@ int battle_calc_cardfix(int attack_type, struct block_list *src, struct block_li
 				else if (!nk[NK_IGNORELONGCARD])	// BF_LONG (there's no other choice)
 					cardfix = cardfix * (100 - tsd->bonus.long_attack_def_rate) / 100;
 
-				if (md && ((rnd() % 100) < cap_value(md->rank / 10, 1, 50))) // [Start's] Monster have (Rank / 10)% (Maximum 50% or Rank 500) chance to skip damage reduction rate
-					cardfix = 1000;
-				else if (!md && ((rnd() % 100) < 10)) // [Start's] PvP have 10% chance to skip damage reduction rate
-					cardfix = 1000;
+				if (md && (cardfix < 100) && ((rnd() % 100) < cap_value(md->rank, 1, 50))) // [Start's] Monster have (Rank)% (Maximum 50%) chance to capped rate at 90% if exceeded
+					cardfix = 100;
+				else if (!md && (cardfix < 100) && ((rnd() % 100) < 50)) // [Start's] PvP have 50% chance to capped rate at 90% if exceeded
+					cardfix = 100;
 
 				APPLY_CARDFIX(damage, cardfix);
 			}
