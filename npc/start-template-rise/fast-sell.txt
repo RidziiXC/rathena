@@ -17,8 +17,8 @@ prontera,158,188,4	script	ขายของเร็ว	84,{
 		
 		.@itemId = @inventorylist_id[.@i];
 		.@isRestrictItemId = 0;
-		for(.@j = 0; .@j < getarraysize(.restrictedItemId); .@j++){
-			if(.@itemId == .restrictedItemId[.@j]){
+		for(.@j = 0; .@j < getarraysize($restrictedItemId); .@j++){
+			if(.@itemId == $restrictedItemId[.@j]){
 				.@isRestrictItemId = 1;
 				break;
 			}
@@ -44,9 +44,5 @@ prontera,158,188,4	script	ขายของเร็ว	84,{
 	}
 	L_Summary:
 	message strcharinfo(0),"ได้รับ " + F_InsertComma(.@summaryZeny) + "z";
-	end;
-	
-OnInit:
-	setarray .restrictedItemId[0],500;
 	end;
 }

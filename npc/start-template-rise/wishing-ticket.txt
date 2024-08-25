@@ -1,0 +1,3 @@
+prontera,158,188,4	script	สุ่มรับ Item ตามประเภท	84,{
+	end;
+}
