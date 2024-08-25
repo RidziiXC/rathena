@@ -317,3 +317,85 @@ function	script	EnchantGrade	{
 	
 	end;
 }
+
+function	script	SlotRemover	{
+	disable_items;
+	.@price = 5000000;
+	menu "(โอกาสได้คืน 50% แต่ละช่อง) (โอกาส 50% ที่อุปกรณ์สวมใส่จะหาย) [^af1ada" + F_InsertComma(.@price) + "z^000000]",-;
+	for(.@i = 0; .@i < 21; .@i++){
+		if(.@i == 14) // Ammo
+		continue;
+		
+		if(getequipisequiped(.@i)){
+			.@menu$ = .@menu$ + F_getpositionname(.@i) + " - [" + getequipname(.@i) + "]";
+			.@isEquiped = 1;
+		}
+		.@menu$ = .@menu$ + ":";
+	}
+	
+	if(!.@isEquiped){
+		mes "คุณไม่ได้สวมใส่อุปกรณ์ใด ๆ อยู่เลย";
+		close;
+	}
+	
+	.@location = (select(.@menu$) - 1);
+	if(.@location >= 14)
+	.@location++;
+
+	if(!getequipisequiped(.@location)){
+		mes "คุณไม่ได้สวมใส่อุปกรณ์ใด ๆ อยู่";
+		close;
+	}
+
+	.@selectedItemId = getequipid(.@location);
+	.@refineCount = getequiprefinerycnt(.@location);
+	setarray .@cards[0],getequipcardid(.@location,0),getequipcardid(.@location,1),getequipcardid(.@location,2),getequipcardid(.@location,3);
+	setarray .@isSuccess[0],(.@cards[0] > 0) ? (rand(100) < 50) : 0,(.@cards[1] > 0) ? (rand(100) < 50) : 0,(.@cards[2] > 0) ? (rand(100) < 50) : 0,(.@cards[3] > 0) ? (rand(100) < 50) : 0,(rand(100) < 50);
+	setarray .@oldRandomOptionIds[0],getequiprandomoption(.@location,0,ROA_ID),getequiprandomoption(.@location,1,ROA_ID),getequiprandomoption(.@location,2,ROA_ID),getequiprandomoption(.@location,3,ROA_ID),getequiprandomoption(.@location,4,ROA_ID);
+	setarray .@oldRandomOptionValues[0],getequiprandomoption(.@location,0,ROA_VALUE),getequiprandomoption(.@location,1,ROA_VALUE),getequiprandomoption(.@location,2,ROA_VALUE),getequiprandomoption(.@location,3,ROA_VALUE),getequiprandomoption(.@location,4,ROA_VALUE);
+	setarray .@oldRandomOptionParams[0],0,0,0,0,0;
+	.@oldGrade = getenchantgrade(.@location);
+	
+	if(callfunc("F_IsEquipIDHack",.@location,.@selectedItemId) || callfunc("F_IsEquipCardHack",.@location,.@cards[0],.@cards[1],.@cards[2],.@cards[3]) || callfunc("F_IsEquipRefineHack",.@location,.@refineCount)){
+		mes "อุปกรณ์มีการเปลี่ยนแปลง โปรดทำรายการใหม่อีกครั้ง";
+		close;
+	}
+	
+	for(.@c = 0; .@c < getarraysize(.@cards); .@c++){
+		if(.@cards[.@c] > 0){
+			.@isFound = 1;
+			break;
+		}
+	}
+	
+	if(!.@isFound){
+		mes "อุปกรณ์ดังกล่าว ไม่ได้ฝังอะไรอยู่เลย";
+		close;
+	}
+	
+	if(Zeny < .@price){
+		mes "Zeny ไม่เพียงพอ";
+		close;
+	}
+	
+	delequip .@location;
+	
+	for(.@c = 0; .@c < getarraysize(.@cards); .@c++){
+		if(.@isSuccess[.@c] > 0)
+		getitem .@cards[.@c],1;
+	}
+	
+	if(.@isSuccess[4])
+	getitem4 .@selectedItemId,1,1,.@refineCount,0,0,0,0,0,.@oldGrade,.@oldRandomOptionIds,.@oldRandomOptionValues,.@oldRandomOptionParams;
+	
+	ChangeZeny(-.@price);
+	
+	for(.@s = 0; .@s < 5; .@s++){
+		if(.@s == 4)
+		mes "อุปกรณ์สวมใส่: " + (.@isSuccess[.@s] ? "ได้คืน" : "ไม่ได้คืน");
+		else
+		mes "ช่องที่ " + .@s + ": " + (.@isSuccess[.@s] ? "ได้คืน" : "ไม่ได้คืน");
+	}
+	
+	close;
+}
