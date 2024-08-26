@@ -119,8 +119,11 @@ prontera,158,190,4	script	เสริมแกร่ง	84,{
 	,"เสริมแกร่งด้วย Grade",L_Grade
 	,"นำ Card & Enchantment ออกจากช่องอุปกรณ์",L_SlotRemover
 	;
+	mes "หากการเสริมแกร่ง^d32323ไม่สำเร็จ^000000";
+	mes "• มีโอกาส 10% ที่ ^d32323Item จะหายไป^000000";
+	mes "• นอกนั้นจำนวนเสริมแกร่งจะลดลง 1";
 	refineui;
-	end;
+	close;
 	
 	L_RandomOption:
 	RandomOption();
