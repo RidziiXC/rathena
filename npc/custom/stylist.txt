@@ -14,37 +14,39 @@
 //============================================================
 
 prontera,170,180,1	script	Stylist#custom_stylist	122,{
-	setarray .@Styles[1],
-		getbattleflag("max_cloth_color"),
-		getbattleflag("max_hair_style"),
-		getbattleflag("max_hair_color");
-	setarray .@Look[1],
-		LOOK_CLOTHES_COLOR,
-		LOOK_HAIR,
-		LOOK_HAIR_COLOR;
-	set .@s, select(" ~ Cloth color: ~ Hairstyle: ~ Hair color");
-	set .@Revert, getlook(.@Look[.@s]);
-	set .@Style,1;
+	.@isSummoner = (eaclass() == EAJ_SUMMONER);
+	setarray .@types[1],getbattleflag("max_cloth_color"),getbattleflag("max_hair_style"),getbattleflag("max_hair_color");
+	setarray .@looks[1],LOOK_CLOTHES_COLOR,LOOK_HAIR,LOOK_HAIR_COLOR;
+	.@s = select(" ~ สีเสื้อ: ~ ทรงผม: ~ สีผม: ~ ชุด Class 3");
+	if(.@s == 4){
+		.@type = (select("แบบที่ 1:แบบที่ 2") - 1);
+		atcommand "@bodystyle " + .@type;
+		end;
+	}
+	if((.@s == 2) && .@isSummoner)
+	.@types[2] = 10;
+	.@revert = getlook(.@looks[.@s]);
+	.@selected = (((.@s == 2) && .@isSummoner) ? 0 : 1);
 	while(1) {
-		setlook .@Look[.@s], .@Style;
-		message strcharinfo(0),"This is style #"+.@Style+".";
-		set .@menu$, " ~ Next (^0055FF"+((.@Style!=.@Styles[.@s])?.@Style+1:1)+"^000000): ~ Previous (^0055FF"+((.@Style!=1)?.@Style-1:.@Styles[.@s])+"^000000): ~ Jump to...: ~ Revert to original (^0055FF"+.@Revert+"^000000)";
-		switch(select(.@menu$)) {
+		setlook .@looks[.@s],.@selected;
+		message strcharinfo(0),"แบบที่ #" + .@selected;
+		.@menu$ = " ~ ต่อไป (^0055FF" + ((.@selected != .@types[.@s]) ? (.@selected + 1) : 1) + "^000000): ~ ก่อนหน้า (^0055FF" + ((.@selected != (((.@s == 2) && .@isSummoner) ? 0 : 1)) ? (.@selected - 1) : .@types[.@s]) + "^000000): ~ ข้ามไปที่...: ~ กลับสู่แบบเดิม (^0055FF" + .@revert + "^000000)";
+		switch(select(.@menu$)){
 		case 1:
-			set .@Style, ((.@Style != .@Styles[.@s]) ? .@Style+1 : 1);
+			.@selected = ((.@selected != .@types[.@s]) ? (.@selected + 1) : (((.@s == 2) && .@isSummoner) ? 0 : 1));
 			break;
 		case 2:
-			set .@Style, ((.@Style != 1) ? .@Style-1 : .@Styles[.@s]);
+			.@selected = ((.@selected != (((.@s == 2) && .@isSummoner) ? 0 : 1)) ? (.@selected - 1) : .@types[.@s]);
 			break;
 		case 3:
-			message strcharinfo(0),"Choose a style between 1 - "+.@Styles[.@s]+".";
-			input .@Style,0,.@Styles[.@s];
-			if (!.@Style)
-				set .@Style, rand(1,.@Styles[.@s]);
+			message strcharinfo(0),"เลือกแบบที่ 1~" + .@types[.@s];
+			input .@selected,0,.@types[.@s];
+			if (!.@selected)
+			.@selected = rand(1,.@types[.@s]);
 			break;
 		case 4:
-			set .@Style, .@Revert;
-			setlook .@Look[.@s], .@Revert;
+			.@selected = .@revert;
+			setlook .@looks[.@s],.@revert;
 			break;
 		}
 	}
