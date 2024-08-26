@@ -17,6 +17,7 @@ prontera,156,188,4	script	ตั้งค่า	84,{
 	mes "• @autoloottype";
 	mes "• @autotrade";
 	mes "• @who";
+	mes "• @whereis";
 	next;
 	goto L_Menu;
 	

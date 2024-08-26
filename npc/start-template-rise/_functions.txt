@@ -399,3 +399,37 @@ function	script	SlotRemover	{
 	
 	close;
 }
+
+function	script	Storage	{
+	.@menu$ = "คลังเก็บของปกติ:คลังเก็บของ Guild:";
+	for(.@s = 0; .@s < 9; .@s++)
+	.@menu$ += "คลังเก็บของพิเศษ " + (.@s + 1) + ":";
+	.@selectedStorage = select(.@menu$);
+	if(.@selectedStorage == 1)
+	openstorage;
+	else if(.@selectedStorage == 2)
+	guildopenstorage();
+	else{
+		.@storageId = (.@selectedStorage - 2);
+		if(getd("#STORAGE" + .@storageId))
+		openstorage2 .@storageId,STOR_MODE_GET|STOR_MODE_PUT;
+		else{
+			.@price = (10000000 * .@storageId);
+			menu
+			"ยกเลิก",-
+			,"ซื้อคลังเก็บของพิเศษ " + .@storageId + " (ใช้ได้ทั้ง ID) [^af1ada" + F_InsertComma(.@price) + "z^000000]",L_Buy;
+			end;
+			
+			L_Buy:
+			if(Zeny < .@price){
+				mes "Zeny ไม่เพียงพอ";
+				close;
+			}
+			ChangeZeny(-.@price);
+			set getd("#STORAGE" + .@storageId),1;
+			openstorage2 .@storageId,STOR_MODE_GET|STOR_MODE_PUT;
+			end;
+		}
+	}
+	return;
+}

@@ -1,3 +1,8 @@
+prontera,140,190,4	script	คลังเก็บของ	84,{
+	Storage();
+	end;
+}
+
 prontera,142,190,4	script	เติม AP	84,{
 	atcommand "@healap";
 	end;

@@ -58,6 +58,7 @@ Body:
       autoloottype: true
       autotrade: true
       who: true
+      whereis: true
       changedress: true
       resurrect: true
     Permissions:
