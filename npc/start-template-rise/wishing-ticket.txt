@@ -7,6 +7,13 @@ prontera,160,188,4	script	สุ่มรับ Item ตามประเภท	84,{
 		close;		
 	}
 	next;
+	menu
+	"Weapon",-
+	,"Armor",L_Armor
+	,"Card",L_Card
+	,"Enchantment",L_Enchantment
+	;
+	
 	setarray .@subType$[0],"One-Handed Sword","Two-Handed Sword","Dagger","Katar","One-Handed Axe","Two-Handed Axe","Huuma","Mace","One-Handed Spear","Two-Handed Spear","Two-Handed Staff","Book","Staff","Bow","Knuckle","Musical","Whip","Revolver","Rifle","Shotgun","Gatling Gun","Grenade Launcher";
 	for(.@i = 0; .@i < getarraysize(.@subType$); .@i++)
 	.@menu$ += .@subType$[.@i] + ":";
@@ -15,21 +22,52 @@ prontera,160,188,4	script	สุ่มรับ Item ตามประเภท	84,{
 	.@saveIndex = .@index;
 	if(.@index >= 14)
 	.@index++;
-	if(.@index >= 16)
+	if(.@index >= 18)
 	.@index++;
 
 	.@variableName$ = $subType$[.@index];
+	.@mes$ = "ต้องการสุ่ม " + .@subType$[.@saveIndex] + " กี่รอบ?";
+	goto L_Confirmation;
 	
-	mes "ต้องการสุ่ม " + .@subType$[.@saveIndex + 1] + " กี่รอบ?";
+	L_Armor:
+	setarray .@location$[0],"Shield","Head-Middle","Head-Top","Head-Low","Head-Middle-Top","Head-Low-Middle-Top","Head-Low-Middle","Armor","Shoes","Garment","Accessory","Head-Low-Top","Head-Top-Middle","Costume Head-Top","Costume Head-Middle","Costume Head-Low","Left Accessory","Costume Garment","Head-Top-Middle-Low","Head-Middle-Low","Head-Top-Low","Costume Head-Middle-Low","Costume Head-Top-Middle","Costume Head-Top-Middle-Low","Costume Head-Top-Low","Shadow Armor","Shadow Shield","Shadow Shoes","Shadow Weapon","Shadow Left Accessory","Shadow Right Accessory","Right Accessory";
+	for(.@i = 0; .@i < getarraysize(.@location$); .@i++)
+	.@menu$ += .@location$[.@i] + ":";
+
+	.@index = (select(.@menu$) - 1);
+
+	.@variableName$ = $location$[.@index];
+	.@mes$ = "ต้องการสุ่ม " + .@location$[.@index] + " กี่รอบ?";
+	goto L_Confirmation;
+	
+	L_Card:
+	.@variableName$ = "card2Ids";
+	.@mes$ = "ต้องการสุ่ม Card กี่รอบ?";
+	goto L_Confirmation;
+	
+	L_Enchantment:
+	.@variableName$ = "enchant2Ids";
+	.@mes$ = "ต้องการสุ่ม Enchantment กี่รอบ?";
+	goto L_Confirmation;
+	
+	L_Confirmation:
+	mes .@mes$;
 	mes "(0~" + F_InsertComma(.@wishingTicketAmount) + ")";
 	input .@i;
 	if((.@i <= 0) || (.@i > .@wishingTicketAmount)){
 		mes "ยกเลิกเรียบร้อยแล้ว";
 		close;
 	}
-	if(!checkweight(1490,1)){
-		mes "ไม่สามารถแบกของเพิ่มได้อีกแล้ว";
-		close;
+	freeloop(1);
+	while(.@i){
+		if(!checkweight(1490,1)){
+			mes "ไม่สามารถแบกของเพิ่มได้อีกแล้ว";
+			close;
+		}
+		.@i--;
+		delitem $wishingTicketItemId,1;
+		getitem getd("$" + .@variableName$ + "[" + rand(0,getarraysize(getd("$" + .@variableName$))) + "]"),1;
 	}
+	freeloop(0);
 	close;
 }
