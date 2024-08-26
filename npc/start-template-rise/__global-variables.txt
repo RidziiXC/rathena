@@ -5,6 +5,8 @@ OnInit:
 	if($globalVariableVersion != 1){
 		$globalVariableVersion = 1;
 		
+		$wishingTicketItemId = 10000001;
+		
 		deletearray $restrictedItemId[0],getarraysize($restrictedItemId);
 		setarray $restrictedItemId[0],10000000,10000001;
 		

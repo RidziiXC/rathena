@@ -11,6 +11,7 @@ prontera,158,188,4	script	ขายของเร็ว	84,{
 	getinventorylist;
 	.@ocLv = getskilllv(38);
 	.@ocRate = ((.@ocLv > 0) ? min(24,(4 + (3 * .@ocLv))) : 0);
+	freeloop(1);
 	for(.@i = 0; .@i < @inventorylist_count; .@i++){
 		if(@inventorylist_favorite[.@i] || @inventorylist_equip[.@i])
 		continue;
@@ -44,5 +45,6 @@ prontera,158,188,4	script	ขายของเร็ว	84,{
 	}
 	L_Summary:
 	message strcharinfo(0),"ได้รับ " + F_InsertComma(.@summaryZeny) + "z";
+	freeloop(0);
 	end;
 }

@@ -1,3 +1,35 @@
-prontera,158,188,4	script	สุ่มรับ Item ตามประเภท	84,{
-	end;
+prontera,160,188,4	script	สุ่มรับ Item ตามประเภท	84,{
+	mes "ใช้ " + mesitemlink($wishingTicketItemId,true) + " ต่อการสุ่ม 1 รอบ";
+	.@wishingTicketAmount = countitem($wishingTicketItemId);
+	if(!.@wishingTicketAmount){
+		next;
+		mes mesitemlink($wishingTicketItemId,true) + " ไม่เพียงพอ";
+		close;		
+	}
+	next;
+	setarray .@subType$[0],"One-Handed Sword","Two-Handed Sword","Dagger","Katar","One-Handed Axe","Two-Handed Axe","Huuma","Mace","One-Handed Spear","Two-Handed Spear","Two-Handed Staff","Book","Staff","Bow","Knuckle","Musical","Whip","Revolver","Rifle","Shotgun","Gatling Gun","Grenade Launcher";
+	for(.@i = 0; .@i < getarraysize(.@subType$); .@i++)
+	.@menu$ += .@subType$[.@i] + ":";
+
+	.@index = (select(.@menu$) - 1);
+	.@saveIndex = .@index;
+	if(.@index >= 14)
+	.@index++;
+	if(.@index >= 16)
+	.@index++;
+
+	.@variableName$ = $subType$[.@index];
+	
+	mes "ต้องการสุ่ม " + .@subType$[.@saveIndex + 1] + " กี่รอบ?";
+	mes "(0~" + F_InsertComma(.@wishingTicketAmount) + ")";
+	input .@i;
+	if((.@i <= 0) || (.@i > .@wishingTicketAmount)){
+		mes "ยกเลิกเรียบร้อยแล้ว";
+		close;
+	}
+	if(!checkweight(1490,1)){
+		mes "ไม่สามารถแบกของเพิ่มได้อีกแล้ว";
+		close;
+	}
+	close;
 }
