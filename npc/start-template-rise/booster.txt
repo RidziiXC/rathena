@@ -8,10 +8,11 @@ prontera,156,184,4	script	เร่งแหลก	84,{
 	.@maxMultiplier = 100;
 	.@dropMultiplierDivider = 2;
 	mes "[วิธีเล่น]";
-	mes "กำจัด Monster ให้หมด เพื่อรับรางวัล 'Monster จะให้ EXP มากขึ้นและ Drop Item ง่ายขึ้น'";
+	mes "กำจัด Monster ให้หมด";
 	next;
 	menu "เล่น 'เร่งแหลก'",-;
-	mes "ต้องการเร่งเร็วแค่ไหน?";
+	mes "เร่ง EXP +{ระบุ}% (30 นาที)";
+	mes "เร่ง DROP +{ระบุ}% (30 นาที)";
 	mes "โปรดระบุ 1~" + F_InsertComma(.@maxMultiplier);
 	next;
 	input .@i;
@@ -22,8 +23,8 @@ prontera,156,184,4	script	เร่งแหลก	84,{
 	.@price = (.@i * .@i * .@basePrice);
 	expBoost = (.@baseMultiplier * .@i);
 	dropBoost = ((.@baseMultiplier * .@i) / .@dropMultiplierDivider);
-	mes "เร่ง EXP +" + F_InsertComma(expBoost) + "%";
-	mes "เร่ง Drop +" + F_InsertComma(dropBoost) + "%";
+	mes "เร่ง EXP +" + F_InsertComma(expBoost) + "% (30 นาที)";
+	mes "เร่ง DROP +" + F_InsertComma(dropBoost) + "% (30 นาที)";
 	next;
 	menu "เข้า [^af1ada" + F_InsertComma(.@price) + "z^000000]",-;
 	if(Zeny < .@price){
@@ -39,3 +40,62 @@ OnInit:
 	waitingroom "เร่ง EXP & DROP",0;
 	end;
 }
+
+guild_vs5	mapflag	noteleport
+guild_vs5	mapflag	nowarp
+guild_vs5	mapflag	nowarpto
+guild_vs5	mapflag	nosave
+guild_vs5	mapflag	nomemo
+guild_vs5	mapflag	noloot
+guild_vs5	mapflag	noexp
+guild_vs5	mapflag	nobranch
+guild_vs5	mapflag	notomb
+guild_vs5	mapflag	nopetcapture
+
+guild_vs5,50,60,4	script	เริ่ม#เร่งแหลก	84,{
+	hideonnpc instance_npcname(strnpcinfo(0));
+	'spawnAmount = 10;
+	.@tier1MaxLv = 30;
+	.@tier2MaxLv = 50;
+	.@tier3MaxLv = 100;
+	.@tier4MaxLv = 150;
+	.@tier5MaxLv = 200;
+	for(.@i = 0; .@i < 'spawnAmount; .@i++){
+		.@monsterId = (
+		(BaseLevel > .@tier5MaxLv) ? $attackableMonsterTier6Ids[rand(getarraysize($attackableMonsterTier6Ids))]
+		: (BaseLevel > .@tier4MaxLv) ? $attackableMonsterTier5Ids[rand(getarraysize($attackableMonsterTier5Ids))]
+		: (BaseLevel > .@tier3MaxLv) ? $attackableMonsterTier4Ids[rand(getarraysize($attackableMonsterTier4Ids))]
+		: (BaseLevel > .@tier2MaxLv) ? $attackableMonsterTier3Ids[rand(getarraysize($attackableMonsterTier3Ids))]
+		: (BaseLevel > .@tier1MaxLv) ? $attackableMonsterTier2Ids[rand(getarraysize($attackableMonsterTier2Ids))]
+		: $attackableMonsterTier1Ids[rand(0,getarraysize($attackableMonsterTier1Ids))]
+		);
+		monster 'mapName$,0,0,"--ja--",.@monsterId,1,instance_npcname(strnpcinfo(0)) + "::OnMonsterDead";
+	}
+	announce "Monster เหลือ " + F_InsertComma('spawnAmount - 'progression) + " ตัว",bc_self;
+	end;
+	
+OnMonsterDead:
+'progression++;
+		if('progression >= 'spawnAmount){
+			announce "'เร่งแหลก' ผ่านแล้ว!",bc_self;
+			sc_start SC_EXPBOOST,1800000,expBoost;
+			sc_start SC_ITEMBOOST,1800000,dropBoost;
+			addtimer 2000,instance_npcname(strnpcinfo(0)) + "::OnComplete";
+		}
+		else
+		announce "Monster เหลือ " + F_InsertComma('spawnAmount - 'progression) + " ตัว",bc_self;
+		end;
+		
+OnComplete:
+		warp "Save",0,0;
+		end;
+		
+OnInstanceInit:
+		'progression = 0;
+		'mapName$ = instance_mapname("guild_vs5");
+		end;
+		
+OnInit:
+		waitingroom "เริ่ม",0;
+		end;
+	}
