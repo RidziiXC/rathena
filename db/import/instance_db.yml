@@ -40,3 +40,19 @@
 Header:
   Type: INSTANCE_DB
   Version: 2
+
+Body:
+ - Id: 1000
+   Name: Booster
+   TimeLimit: 600
+   Enter:
+     Map: guild_vs5
+     X: 50
+     Y: 50
+ - Id: 1001
+   Name: VR Battlefield
+   TimeLimit: 600
+   Enter:
+     Map: guild_vs4
+     X: 50
+     Y: 50

@@ -1,0 +1,41 @@
+prontera,156,184,4	script	เร่งแหลก	84,{
+	if(instance_id(IM_CHAR)){
+		mes "โปรดทำลาย Instance Dungeon เก่าเสียก่อน";
+		close;
+	}
+	.@basePrice = 1000;
+	.@baseMultiplier = 100;
+	.@maxMultiplier = 100;
+	.@dropMultiplierDivider = 2;
+	mes "[วิธีเล่น]";
+	mes "กำจัด Monster ให้หมด เพื่อรับรางวัล 'Monster จะให้ EXP มากขึ้นและ Drop Item ง่ายขึ้น'";
+	next;
+	menu "เล่น 'เร่งแหลก'",-;
+	mes "ต้องการเร่งเร็วแค่ไหน?";
+	mes "โปรดระบุ 1~" + F_InsertComma(.@maxMultiplier);
+	next;
+	input .@i;
+	if((.@i <= 0) || (.@i > .@maxMultiplier)){
+		mes "ยกเลิกเรียบร้อยแล้ว";
+		close;
+	}
+	.@price = (.@i * .@i * .@basePrice);
+	expBoost = (.@baseMultiplier * .@i);
+	dropBoost = ((.@baseMultiplier * .@i) / .@dropMultiplierDivider);
+	mes "เร่ง EXP +" + F_InsertComma(expBoost) + "%";
+	mes "เร่ง Drop +" + F_InsertComma(dropBoost) + "%";
+	next;
+	menu "เข้า [^af1ada" + F_InsertComma(.@price) + "z^000000]",-;
+	if(Zeny < .@price){
+		mes "Zeny ไม่เพียงพอ";
+		close;
+	}
+	ChangeZeny(-.@price);
+	.@id = instance_create("Booster",IM_CHAR);
+	instance_enter("Booster",50,50,getcharid(0),.@id);
+	close;
+	
+OnInit:
+	waitingroom "เร่ง EXP & DROP",0;
+	end;
+}

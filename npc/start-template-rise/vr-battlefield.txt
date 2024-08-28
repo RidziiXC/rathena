@@ -1,0 +1,44 @@
+prontera,156,184,4	script	เร่งแหลก	84,{
+	if(!is_party_leader())
+	{
+		message strcharinfo(0),"เกิดข้อผิดพลาด: ต้องเป็นหัวหน้า Party เสียก่อน";
+		end;
+	}
+	
+	setarray .@prices[0],1000,10000,100000,1000000;
+	setarray .@maxExpRates[0],1000,2000,5000,10000;
+	
+	.@partyId = getcharid(1);
+	getpartymember .@partyId,1,.@memberCharacterIds;
+	.@partyMemberCount = getarraysize(.@memberCharacterIds);
+	for(.@p = 0; .@p < .@partyMemberCount; .@p++){
+		for(.@i = 0; .@i < getarraysize(.@priceLevels); .@i++){
+			if(BaseLevel < .@priceLevels[.@i]){
+				.@price += .@prices[.@i];
+				break;
+			}
+		}
+	}
+	
+	mes "[ค่าใช้จ่าย]";
+	mes "• Level ตัวละครใน Party x ราคาตาม Level";
+	for(.@i = 0; .@i < getarraysize(.@priceLevels); .@i++)
+	mes "• Level < " + .@priceLevels[.@i] + ": [^af1ada" + F_InsertComma(.@prices[.@i]) + "z^000000]";
+	mes "[วิธีเล่น]";
+	mes "• มีเวลา 10 นาที";
+	mes "• เมื่อกำจัด Monster จนหมด ทุกคนจะสุ่มรับ EXP +(100~10000)% และ x DROP";
+	mes "• Monster จะไม่ให้ EXP ตามปกติ";
+	mes "• Monster จะไม่ให้ Item ตามปกติ";
+	menu "เล่น 'โชคลาภเป็นของใคร?' [^af1ada" + F_InsertComma(.@price) + "z^000000]",-;
+	if(Zeny < .@price){
+		mes "Zeny ไม่เพียงพอ";
+		close;
+	}
+	ChangeZeny(-.@price);
+	instance_create("Who's Lucky?"{,<instance mode>{,<owner id>}});
+	end;
+	
+OnInit:
+	waitingroom "เพิ่ม x EXP, x DROP",0;
+	end;
+}
