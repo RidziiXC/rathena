@@ -7,12 +7,14 @@ prontera,156,184,4	script	เร่งแหลก	84,{
 	.@baseMultiplier = 100;
 	.@maxMultiplier = 100;
 	.@dropMultiplierDivider = 2;
+	.@baseMonsterRank = 100;
 	mes "[วิธีเล่น]";
 	mes "กำจัด Monster ให้หมด";
 	next;
 	menu "เล่น 'เร่งแหลก'",-;
-	mes "เร่ง EXP +{ระบุ}% (30 นาที)";
-	mes "เร่ง DROP +{ระบุ}% (30 นาที)";
+	mes "เร่ง EXP +{ระบุ x " + .@baseMultiplier + "}% (30 นาที)";
+	mes "เร่ง DROP +{ระบุ x " + .@baseMultiplier + "}% (30 นาที)";
+	mes "Monster จะมี Rank {ระบุ x " + .@baseMonsterRank + "}";
 	mes "โปรดระบุ 1~" + F_InsertComma(.@maxMultiplier);
 	next;
 	input .@i;
@@ -23,8 +25,10 @@ prontera,156,184,4	script	เร่งแหลก	84,{
 	.@price = (.@i * .@i * .@basePrice);
 	expBoost = (.@baseMultiplier * .@i);
 	dropBoost = ((.@baseMultiplier * .@i) / .@dropMultiplierDivider);
+	monsterRank = (.@baseMonsterRank * .@i);
 	mes "เร่ง EXP +" + F_InsertComma(expBoost) + "% (30 นาที)";
 	mes "เร่ง DROP +" + F_InsertComma(dropBoost) + "% (30 นาที)";
+	mes "Monster จะมี Rank " + F_InsertComma(monsterRank);
 	next;
 	menu "เข้า [^af1ada" + F_InsertComma(.@price) + "z^000000]",-;
 	if(Zeny < .@price){
@@ -70,6 +74,7 @@ guild_vs5,50,60,4	script	เริ่ม#เร่งแหลก	84,{
 		: $attackableMonsterTier1Ids[rand(0,getarraysize($attackableMonsterTier1Ids))]
 		);
 		monster 'mapName$,0,0,"--ja--",.@monsterId,1,instance_npcname(strnpcinfo(0)) + "::OnMonsterDead";
+		setunitdata $@mobid[0],UMOB_RANK,monsterRank;
 	}
 	announce "Monster เหลือ " + F_InsertComma('spawnAmount - 'progression) + " ตัว",bc_self;
 	end;

@@ -2888,14 +2888,17 @@ bool is_infinite_defense(struct block_list *target, int flag)
 			return true;
 	}
 
-	if(status_has_mode(tstatus,MD_IGNOREMELEE) && (flag&(BF_WEAPON|BF_SHORT)) == (BF_WEAPON|BF_SHORT) )
-		return true;
-	if(status_has_mode(tstatus,MD_IGNOREMAGIC) && flag&(BF_MAGIC) )
-		return true;
-	if(status_has_mode(tstatus,MD_IGNORERANGED) && (flag&(BF_WEAPON|BF_LONG)) == (BF_WEAPON|BF_LONG) )
-		return true;
-	if(status_has_mode(tstatus,MD_IGNOREMISC) && flag&(BF_MISC) )
-		return true;
+	bool isSkip = (rnd() % 100 < 10); // [Start's] 10% chance to skip ignore
+	if (!isSkip) {
+		if (status_has_mode(tstatus, MD_IGNOREMELEE) && (flag & (BF_WEAPON | BF_SHORT)) == (BF_WEAPON | BF_SHORT))
+			return true;
+		if (status_has_mode(tstatus, MD_IGNOREMAGIC) && flag & (BF_MAGIC))
+			return true;
+		if (status_has_mode(tstatus, MD_IGNORERANGED) && (flag & (BF_WEAPON | BF_LONG)) == (BF_WEAPON | BF_LONG))
+			return true;
+		if (status_has_mode(tstatus, MD_IGNOREMISC) && flag & (BF_MISC))
+			return true;
+	}
 
 	status_change* tsc = status_get_sc(target);
 	if (tsc && tsc->getSCE(SC_INVINCIBLE))
