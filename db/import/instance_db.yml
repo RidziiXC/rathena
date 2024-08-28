@@ -51,7 +51,7 @@ Body:
      Y: 50
  - Id: 1001
    Name: VR Battlefield
-   TimeLimit: 600
+   TimeLimit: 180
    Enter:
      Map: guild_vs4
      X: 50

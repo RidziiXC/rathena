@@ -1,44 +1,93 @@
-prontera,156,184,4	script	เร่งแหลก	84,{
-	if(!is_party_leader())
-	{
-		message strcharinfo(0),"เกิดข้อผิดพลาด: ต้องเป็นหัวหน้า Party เสียก่อน";
-		end;
+prontera,156,180,4	script	สนามรบจำลอง	84,{
+	if(instance_id(IM_CHAR)){
+		mes "โปรดทำลาย Instance Dungeon เก่าเสียก่อน";
+		close;
 	}
+	.@basePrice = 10000;
+	.@basePercentage = 1;
+	.@baseMonsterRank = 10000;
+	.@maxMonsterRankMultiplier = 5;
 	
-	setarray .@prices[0],1000,10000,100000,1000000;
-	setarray .@maxExpRates[0],1000,2000,5000,10000;
+	.@price = (BaseLevel * .@basePrice);
+	monsterRank = .@baseMonsterRank;
+	monsterRankMultiplier = .@maxMonsterRankMultiplier;
 	
-	.@partyId = getcharid(1);
-	getpartymember .@partyId,1,.@memberCharacterIds;
-	.@partyMemberCount = getarraysize(.@memberCharacterIds);
-	for(.@p = 0; .@p < .@partyMemberCount; .@p++){
-		for(.@i = 0; .@i < getarraysize(.@priceLevels); .@i++){
-			if(BaseLevel < .@priceLevels[.@i]){
-				.@price += .@prices[.@i];
-				break;
-			}
-		}
-	}
-	
-	mes "[ค่าใช้จ่าย]";
-	mes "• Level ตัวละครใน Party x ราคาตาม Level";
-	for(.@i = 0; .@i < getarraysize(.@priceLevels); .@i++)
-	mes "• Level < " + .@priceLevels[.@i] + ": [^af1ada" + F_InsertComma(.@prices[.@i]) + "z^000000]";
 	mes "[วิธีเล่น]";
-	mes "• มีเวลา 10 นาที";
-	mes "• เมื่อกำจัด Monster จนหมด ทุกคนจะสุ่มรับ EXP +(100~10000)% และ x DROP";
-	mes "• Monster จะไม่ให้ EXP ตามปกติ";
-	mes "• Monster จะไม่ให้ Item ตามปกติ";
-	menu "เล่น 'โชคลาภเป็นของใคร?' [^af1ada" + F_InsertComma(.@price) + "z^000000]",-;
+	mes "• Monster จะเกิดเรื่อย ๆ ภายใน 3 นาที";
+	mes "• เมื่อกำจัด Monster จะได้รับ EXP " + StringBase10000(.@basePercentage) + "%";
+	mes "• Monster จะมี Rank " + F_InsertComma(monsterRank) + "~" + F_InsertComma(monsterRank * monsterRankMultiplier);
+	next;
+	menu "เล่น 'สนามรบจำลอง' [^af1ada" + F_InsertComma(.@price) + "z^000000]",-;
 	if(Zeny < .@price){
 		mes "Zeny ไม่เพียงพอ";
 		close;
 	}
 	ChangeZeny(-.@price);
-	instance_create("Who's Lucky?"{,<instance mode>{,<owner id>}});
-	end;
+	.@id = instance_create("VR Battlefield",IM_CHAR);
+	instance_enter("VR Battlefield",50,50,getcharid(0),.@id);
+	close;
 	
 OnInit:
-	waitingroom "เพิ่ม x EXP, x DROP",0;
+	waitingroom "การันตี EXP",0;
 	end;
 }
+
+guild_vs4	mapflag	nowarp
+guild_vs4	mapflag	nowarpto
+guild_vs4	mapflag	nosave
+guild_vs4	mapflag	nomemo
+guild_vs4	mapflag	noloot
+guild_vs4	mapflag	noexp
+guild_vs4	mapflag	nobranch
+guild_vs4	mapflag	notomb
+guild_vs4	mapflag	nopetcapture
+
+guild_vs4,50,60,4	script	เริ่ม#สนามรบจำลอง	84,{
+	hideonnpc instance_npcname(strnpcinfo(0));
+	'spawnAmount = 30;
+	callsub L_Spawn;
+	announce "Monster เหลือ " + F_InsertComma('spawnAmount - 'progression) + " ตัว",bc_self;
+	end;
+	
+	L_Spawn:
+	.@tier1MaxLv = 30;
+	.@tier2MaxLv = 50;
+	.@tier3MaxLv = 100;
+	.@tier4MaxLv = 150;
+	.@tier5MaxLv = 200;
+	for(.@i = 0; .@i < 'spawnAmount; .@i++){
+		.@monsterId = (
+		(BaseLevel > .@tier5MaxLv) ? $attackableMonsterTier6Ids[rand(getarraysize($attackableMonsterTier6Ids))]
+		: (BaseLevel > .@tier4MaxLv) ? $attackableMonsterTier5Ids[rand(getarraysize($attackableMonsterTier5Ids))]
+		: (BaseLevel > .@tier3MaxLv) ? $attackableMonsterTier4Ids[rand(getarraysize($attackableMonsterTier4Ids))]
+		: (BaseLevel > .@tier2MaxLv) ? $attackableMonsterTier3Ids[rand(getarraysize($attackableMonsterTier3Ids))]
+		: (BaseLevel > .@tier1MaxLv) ? $attackableMonsterTier2Ids[rand(getarraysize($attackableMonsterTier2Ids))]
+		: $attackableMonsterTier1Ids[rand(0,getarraysize($attackableMonsterTier1Ids))]
+		);
+		monster 'mapName$,0,0,"--ja--",.@monsterId,1,instance_npcname(strnpcinfo(0)) + "::OnMonsterDead";
+		setunitdata $@mobid[0],UMOB_RANK,monsterRank * rand(1,monsterRankMultiplier);
+	}
+	return;
+	
+OnMonsterDead:
+.@exp = ((NextBaseExp > 0) ? (NextBaseExp / 10000) : 0);
+.@jobExp = ((NextJobExp > 0) ? (NextJobExp / 10000) : 0);
+getexp2 .@exp,.@jobExp;
+'progression++;
+		if('progression >= 'spawnAmount){
+			'progression = 0;
+			callsub L_Spawn;
+		}
+		else
+		announce "Monster เหลือ " + F_InsertComma('spawnAmount - 'progression) + " ตัว",bc_self;
+		end;
+		
+OnInstanceInit:
+		'progression = 0;
+			'mapName$ = instance_mapname("guild_vs4");
+		end;
+		
+OnInit:
+		waitingroom "เริ่ม",0;
+		end;
+	}

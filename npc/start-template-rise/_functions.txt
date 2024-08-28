@@ -1,3 +1,15 @@
+function	script	StringBase10000	{
+	.@value = getarg(0,0);
+	if(.@value < 10)
+	return ("0.0" + .@value);
+	else if(.@value < 100)
+	return ("0." + (.@value / 10));
+	else if(.@value < 1000)
+	return insertchar((.@value / 10),".",1);
+	else
+	return (.@value /= 100);
+}
+
 function	script	Cap	{ return cap_value(getarg(0,0) + getarg(1,0),0,INT_MAX); }
 
 function	script	IsZenyExceed	{
