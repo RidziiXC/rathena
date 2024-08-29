@@ -43,8 +43,12 @@ Header:
   Type: MOB_AVAIL_DB
   Version: 1
 
-#Body:
-  # Examples
+Body:
+  - Mob: M_HORNET
+    Sprite: HORNET
+  - Mob: M_HORNET2
+    Sprite: HORNET
+
 #  - Mob: PORING
 #    Sprite: BAPHOMET
 #  - Mob: E_OBEAUNE

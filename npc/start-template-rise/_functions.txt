@@ -10,6 +10,16 @@ function	script	StringBase10000	{
 	return (.@value /= 100);
 }
 
+function	script	KM	{
+	.@value = getarg(0,0);
+	if(.@value < 1000)
+	return .@value;
+	else if(.@value < 1000000)
+	return (.@value /= 1000) + "k";
+	else if(.@value >= 1000000)
+	return (.@value /= 1000000) + "m";
+}
+
 function	script	Cap	{ return cap_value(getarg(0,0) + getarg(1,0),0,INT_MAX); }
 
 function	script	IsZenyExceed	{
