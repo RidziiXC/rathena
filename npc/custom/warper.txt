@@ -29,6 +29,9 @@
 	" ~ Dungeon",Dungeons,
 	" ~ Mystery Dungeon",MysteryDungeons,
 	" ~ Boss Dungeon",BossDungeons,
+	" ~ PvP [^af1ada" + getmapusers("pvp_n_1-3") + " คน^000000]",Pvp,
+	" ~ PvP (Party ได้) [^af1ada" + getmapusers("pvp_n_1-5") + " คน^000000]",PvpParty,
+	" ~ PvP (Guild ได้) [^af1ada" + getmapusers("pvp_n_1-1") + " คน^000000]",PvpGuild,
 	" ~ ปราสาท Guild",Castles,
 	" ~ Guild Dungeon",Guild_Dungeons,
 	//" ~ Instance",Instances,
@@ -77,6 +80,18 @@ BossDungeons:
 	delitem .@costItemId,.@cost;
 	specialeffect2 509;
 	warp $bossDungeonMapName$[.@index],0,0;
+	end;
+
+Pvp:
+	warp "pvp_n_1-3",0,0;
+	end;
+
+PvpParty:
+	warp "pvp_n_1-5",0,0;
+	end;
+
+PvpGuild:
+	warp "pvp_n_1-1",0,0;
 	end;
 
 	// ------------------- Functions -------------------
