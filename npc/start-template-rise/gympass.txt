@@ -24,6 +24,7 @@ prontera,138,190,4	script	เพิ่งแรงแบกของ	899,{
 			else if((.@questPoints[.@i] * .@itemAmount) > .@expNeeded)
 			.@itemAmount = (.@expNeeded / .@questPoints[.@i]);
 			delitem .@questItemId[.@i],.@itemAmount;
+			specialeffect2 509;
 			gymPassQuest += (.@questPoints[.@i] * .@itemAmount);
 			if(gymPassQuest >= .@price){
 				gymPassQuest = 0;

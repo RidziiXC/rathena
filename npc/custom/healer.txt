@@ -14,6 +14,14 @@
 //============================================================
 
 -	script	Buff	-1,{
+	.@fullBuffCostItemId = $wishingTicketItemId;
+	.@fullBuffCost = (1 * max(1,fullBuffCostMultiplier));
+	.@repairAllPrice = (100000 * max(1,repairAllPriceMultiplier));
+	menu
+	"¿×é¹¿Ù HP & SP àµçÁ",-
+	,"¿×é¹¿Ù HP & SP àµçÁ & ÃÑº Buff [^af1ada" + getitemname(.@fullBuffCostItemId) + " " + F_InsertComma(.@fullBuffCost) + " ªÔé¹^000000] ",L_FullBuff
+	,"«èÍÁÍØ»¡Ã³ì·Ñé§µÑÇ [^af1ada" + F_InsertComma(.@repairAllPrice) + "z^000000]",L_RepairAll
+	;
 	.@Delay = 3;
 	if (@HD > gettimetick(2))
 	end;
@@ -21,6 +29,44 @@
 	percentheal 100,100;
 	if (.@Delay)
 	@HD = gettimetick(2) + .@Delay;
+	end;
+	
+	L_FullBuff:
+	if(countitem(.@fullBuffCostItemId) < .@fullBuffCost){
+		mes getitemname(.@fullBuffCostItemId) + " äÁèà¾ÕÂ§¾Í";
+		close;
+	}
+	delitem .@fullBuffCostItemId,.@fullBuffCost;
+	specialeffect2 509;
+	sc_start SC_BLESSING,1800000,10;
+	sc_start SC_INCREASEAGI,1800000,10;
+	sc_start SC_ANGELUS,1800000,10;
+	sc_start SC_IMPOSITIO,1800000,5;
+	sc_start SC_KYRIE,1800000,10;
+	sc_start SC_SLOWPOISON,1800000,4;
+	sc_start SC_SUFFRAGIUM,1800000,3;
+	sc_start SC_MAGNIFICAT,1800000,5;
+	sc_start SC_GLORIA,1800000,5;
+	sc_start SC_ASSUMPTIO,1800000,5;
+	sc_start SC_EXPIATIO,1800000,5;
+	sc_start SC_RENOVATIO,1800000,4;
+	sc_start SC_SECRAMENT,1800000,5;
+	//sc_start SC_STRIKING,1800000,5;
+	sc_start SC_OVERTHRUST,1800000,5;
+	percentheal 100,100;
+	specialeffect2 77;
+	fullBuffCostMultiplier = rand(1,10);
+	end;
+	
+	L_RepairAll:
+	if(Zeny < .@repairAllPrice){
+		mes "Zeny äÁèà¾ÕÂ§¾Í";
+		close;
+	}
+	ChangeZeny(-.@repairAllPrice);
+	repairall;
+	specialeffect2 101;
+	repairAllPriceMultiplier = rand(1,10);
 	end;
 }
 

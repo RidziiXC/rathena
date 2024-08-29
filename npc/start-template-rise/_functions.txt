@@ -34,6 +34,7 @@ function	script	ChangeZeny	{
 	.@isIncrease = (.@value >= 0);
 	Zeny = Cap(Zeny,.@value);
 	message strcharinfo(0),(.@isIncrease ? "+" : "-") + F_InsertComma(.@value) + "z เป็น " + F_InsertComma(Zeny) + "z";
+	specialeffect2 18;
 	return;
 }
 

@@ -57,6 +57,7 @@ MysteryDungeons:
 		close;
 	}
 	delitem .@costItemId,.@cost;
+	specialeffect2 509;
 	warp $mysteryDungeonMapName$[.@index],0,0;
 	end;
 
@@ -74,6 +75,7 @@ BossDungeons:
 		close;
 	}
 	delitem .@costItemId,.@cost;
+	specialeffect2 509;
 	warp $bossDungeonMapName$[.@index],0,0;
 	end;
 

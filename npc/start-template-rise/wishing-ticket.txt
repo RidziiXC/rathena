@@ -66,6 +66,7 @@ prontera,160,188,4	script	สุ่มรับ Item ตามประเภท	84,{
 		}
 		.@i--;
 		delitem $wishingTicketItemId,1;
+		specialeffect2 509;
 		getitem getd("$" + .@variableName$ + "[" + rand(0,getarraysize(getd("$" + .@variableName$))) + "]"),1;
 	}
 	freeloop(0);
