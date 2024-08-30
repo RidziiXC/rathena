@@ -39,12 +39,14 @@ prontera,158,188,4	script	ขายของเร็ว	84,{
 		
 		delitemidx @inventorylist_idx[.@i];
 		
-		ChangeZeny(.@itemSellPrice);
+		ChangeZeny(.@itemSellPrice,0);
 		
 		.@summaryZeny = Cap(.@summaryZeny,.@itemSellPrice);
 	}
 	L_Summary:
 	message strcharinfo(0),"ได้รับ " + F_InsertComma(.@summaryZeny) + "z";
 	freeloop(0);
+	if(.@summaryZeny)
+	specialeffect2 18;
 	end;
 }
