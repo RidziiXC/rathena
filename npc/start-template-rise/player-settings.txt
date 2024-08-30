@@ -7,6 +7,7 @@ prontera,156,188,4	script	ตั้งค่า	84,{
 	end;
 	
 	L_Commands:
+	mes "• @load";
 	mes "• @mobinfo";
 	mes "• @iteminfo";
 	mes "• @whodrops";

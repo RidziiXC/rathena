@@ -511,3 +511,15 @@ prontera,162,188,4	script	เช็ค Item	84,{
 OnBuyItem:
 	end;
 }
+
+prontera,164,188,4	script	เช็ค Item เด้ง	84,{
+	errorItemIdPage++;
+	dispbottom "หน้าที่ " + errorItemIdPage;
+	.@shopName$ = "ItemMall" + errorItemIdPage;
+	callshop .@shopName$,1;
+	npcshopattach .@shopName$;
+	end;
+	
+OnBuyItem:
+	end;
+}

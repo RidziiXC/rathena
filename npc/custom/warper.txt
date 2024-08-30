@@ -24,6 +24,7 @@
 	// --------------------------------------------------
 
 	menu	"Warp ล่าสุด ^777777["+lastwarp$+"]^000000",-,
+	" ~ ทดสอบ Damage",TestDamage,
 	" ~ เมือง",Towns,
 	" ~ พื้นที่",Fields,
 	" ~ Dungeon",Dungeons,
@@ -42,6 +43,12 @@
 	else
 	warp lastwarp$,0,0;
 	end;
+	
+TestDamage:
+	.@index = (select(" ~ ปกติ: ~ Rank 0: ~ Rank 10: ~ Rank 100: ~ Rank 1000") - 1);
+	setarray .@mapName$[0],"tra_fild","06guild_01","06guild_02","06guild_03","06guild_04";
+	warp .@mapName$[.@index],0,0;
+	end;
 
 MysteryDungeons:
 	.@costItemId = $wishingTicketItemId;
@@ -51,7 +58,7 @@ MysteryDungeons:
 		setarray .@monsterNames$[0],"^d8601b" + getmonsterinfo(.@monsterIds[0],MOB_NAME) + "^000000","^d8601b" + getmonsterinfo(.@monsterIds[1],MOB_NAME) + "^000000","^d8601b" + getmonsterinfo(.@monsterIds[2],MOB_NAME) + "^000000","^d8601b" + getmonsterinfo(.@monsterIds[3],MOB_NAME) + "^000000";
 		setarray .@monsterExps[0],getmonsterinfo(.@monsterIds[0],MOB_BASEEXP),getmonsterinfo(.@monsterIds[1],MOB_BASEEXP),getmonsterinfo(.@monsterIds[2],MOB_BASEEXP),getmonsterinfo(.@monsterIds[3],MOB_BASEEXP);
 		mes "^1c9311ห้องที่ " + (.@i + 1) + "^000000 [^d32323" + getmonsterinfo(getd("$mysteryDungeonMVP" + .@i),MOB_NAME) + "^000000]\n• " + .@monsterNames$[0] + "(" + .@monsterIds[0] + ") EXP ^00aaff" + KM(.@monsterExps[0]) + "^000000\n• " + .@monsterNames$[1] + "(" + .@monsterIds[1] + ") EXP ^00aaff" + KM(.@monsterExps[1]) + "^000000\n• " + .@monsterNames$[2] + "(" + .@monsterIds[2] + ") EXP ^00aaff" + KM(.@monsterExps[2]) + "^000000\n• " + .@monsterNames$[3] + "(" + .@monsterIds[3] + ") EXP ^00aaff" + KM(.@monsterExps[3]) + "^000000";
-		.@mysteryDungeonMenu$ += "ห้องที่ " + (.@i + 1) + " [Boss - " + (getd("$isMysteryDungeonBossDead" + .@i) ? "^d32323ไม่มีชีวิต^000000" : "^1c9311มีชีวิต^000000") + "] [^af1ada" + getitemname(.@costItemId) + " " + F_InsertComma(.@cost) + " ชิ้น^000000] :";
+		.@mysteryDungeonMenu$ += " ~ ห้องที่ " + (.@i + 1) + " [Boss - " + (getd("$isMysteryDungeonBossDead" + .@i) ? "^d32323ไม่มีชีวิต^000000" : "^1c9311มีชีวิต^000000") + "] [^af1ada" + getitemname(.@costItemId) + " " + F_InsertComma(.@cost) + " ชิ้น^000000] :";
 	}
 	next;
 	.@index = (select(.@mysteryDungeonMenu$) - 1);
@@ -69,7 +76,7 @@ BossDungeons:
 	.@cost = 10;
 	for(.@i = 0; .@i < getarraysize($bossDungeonMapName$); .@i++){
 		mes "^1c9311ห้องที " + (.@i + 1) + "^000000 Monster จะมี Rank " + F_InsertComma(10000 * (.@i + 1));
-		.@bossDungeonMenu$ += "ห้องที่ " + (.@i + 1) + " [^af1ada" + getitemname(.@costItemId) + " " + F_InsertComma(.@cost) + " ชิ้น^000000] (PvP - " + ((.@i < 2) ? "^d32323OFF^000000" : "^1c9311ON^000000") + "):";
+		.@bossDungeonMenu$ += " ~ ห้องที่ " + (.@i + 1) + " [^af1ada" + getitemname(.@costItemId) + " " + F_InsertComma(.@cost) + " ชิ้น^000000] (PvP - " + ((.@i < 2) ? "^d32323OFF^000000" : "^1c9311ON^000000") + "):";
 	}
 	next;
 	.@index = (select(.@bossDungeonMenu$) - 1);
