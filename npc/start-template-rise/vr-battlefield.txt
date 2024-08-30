@@ -62,7 +62,7 @@ guild_vs4,50,60,4	script	เริ่ม#สนามรบจำลอง	84,{
 		: (BaseLevel > .@tier3MaxLv) ? $attackableMonsterTier4Ids[rand(getarraysize($attackableMonsterTier4Ids))]
 		: (BaseLevel > .@tier2MaxLv) ? $attackableMonsterTier3Ids[rand(getarraysize($attackableMonsterTier3Ids))]
 		: (BaseLevel > .@tier1MaxLv) ? $attackableMonsterTier2Ids[rand(getarraysize($attackableMonsterTier2Ids))]
-		: $attackableMonsterTier1Ids[rand(0,getarraysize($attackableMonsterTier1Ids))]
+		: $attackableMonsterTier1Ids[rand(getarraysize($attackableMonsterTier1Ids))]
 		);
 		monster 'mapName$,0,0,"--ja--",.@monsterId,1,instance_npcname(strnpcinfo(0)) + "::OnMonsterDead";
 		setunitdata $@mobid[0],UMOB_RANK,monsterRank * rand(1,monsterRankMultiplier);

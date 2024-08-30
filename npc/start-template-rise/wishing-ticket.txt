@@ -1,5 +1,13 @@
 prontera,160,188,4	script	สุ่มรับ Item ตามประเภท	84,{
-	mes "ใช้ " + mesitemlink($wishingTicketItemId,true) + " ต่อการสุ่ม 1 รอบ";
+	.@weaponCost = 25;
+	.@equipmentCost = 5;
+	.@cardCost = 100;
+	.@enchantmentCost = 250;
+	mes "ใช้ " + mesitemlink($wishingTicketItemId,true) + " ในการสุ่ม";
+	mes "Weapon ใช้ [^af1ada" + F_InsertComma(.@weaponCost) + " ชิ้น^000000]";
+	mes "Armor ใช้ [^af1ada" + F_InsertComma(.@equipmentCost) + " ชิ้น^000000]";
+	mes "Card ใช้ [^af1ada" + F_InsertComma(.@cardCost) + " ชิ้น^000000]";
+	mes "Enchantment ใช้ [^af1ada" + F_InsertComma(.@enchantmentCost) + " ชิ้น^000000]";
 	.@wishingTicketAmount = countitem($wishingTicketItemId);
 	if(!.@wishingTicketAmount){
 		next;
@@ -26,6 +34,7 @@ prontera,160,188,4	script	สุ่มรับ Item ตามประเภท	84,{
 	.@index++;
 
 	.@variableName$ = $subType$[.@index];
+	.@cost = .@weaponCost;
 	.@mes$ = "ต้องการสุ่ม " + .@subType$[.@saveIndex] + " กี่รอบ?";
 	goto L_Confirmation;
 	
@@ -37,20 +46,28 @@ prontera,160,188,4	script	สุ่มรับ Item ตามประเภท	84,{
 	.@index = (select(.@menu$) - 1);
 
 	.@variableName$ = $location$[.@index];
+	.@cost = .@equipmentCost;
 	.@mes$ = "ต้องการสุ่ม " + .@location$[.@index] + " กี่รอบ?";
 	goto L_Confirmation;
 	
 	L_Card:
 	.@variableName$ = "card2Ids";
+	.@cost = .@cardCost;
 	.@mes$ = "ต้องการสุ่ม Card กี่รอบ?";
 	goto L_Confirmation;
 	
 	L_Enchantment:
 	.@variableName$ = "enchant2Ids";
+	.@cost = .@enchantmentCost;
 	.@mes$ = "ต้องการสุ่ม Enchantment กี่รอบ?";
 	goto L_Confirmation;
 	
 	L_Confirmation:
+	.@wishingTicketAmount = .@wishingTicketAmount / .@cost;
+	if(!.@wishingTicketAmount){
+		mes mesitemlink($wishingTicketItemId,true) + " ไม่เพียงพอ";
+		close;		
+	}
 	mes .@mes$;
 	mes "(0~" + F_InsertComma(.@wishingTicketAmount) + ")";
 	input .@i;
@@ -65,9 +82,9 @@ prontera,160,188,4	script	สุ่มรับ Item ตามประเภท	84,{
 			close;
 		}
 		.@i--;
-		delitem $wishingTicketItemId,1;
+		delitem $wishingTicketItemId,.@cost;
 		specialeffect2 509;
-		getitem getd("$" + .@variableName$ + "[" + rand(0,getarraysize(getd("$" + .@variableName$))) + "]"),1;
+		getitem getd("$" + .@variableName$ + "[" + rand(getarraysize(getd("$" + .@variableName$))) + "]"),1;
 	}
 	freeloop(0);
 	close;

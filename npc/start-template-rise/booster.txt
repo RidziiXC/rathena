@@ -12,9 +12,9 @@ prontera,156,184,4	script	เร่งแหลก	84,{
 	mes "กำจัด Monster ให้หมด";
 	next;
 	menu "เล่น 'เร่งแหลก'",-;
-	mes "เร่ง EXP +{ระบุ x " + .@baseMultiplier + "}% (30 นาที)";
-	mes "เร่ง DROP +{ระบุ x " + .@baseMultiplier + "}% (30 นาที)";
-	mes "Monster จะมี Rank {ระบุ x " + .@baseMonsterRank + "}";
+	mes "เร่ง EXP +{ระบุ x " + F_InsertComma(.@baseMultiplier) + "}% (30 นาที)";
+	mes "เร่ง DROP +{ระบุ x " + F_InsertComma((.@baseMultiplier / .@dropMultiplierDivider)) + "}% (30 นาที)";
+	mes "Monster จะมี Rank {ระบุ x " + F_InsertComma(.@baseMonsterRank) + "}";
 	mes "โปรดระบุ 1~" + F_InsertComma(.@maxMultiplier);
 	next;
 	input .@i;
@@ -71,7 +71,7 @@ guild_vs5,50,60,4	script	เริ่ม#เร่งแหลก	84,{
 		: (BaseLevel > .@tier3MaxLv) ? $attackableMonsterTier4Ids[rand(getarraysize($attackableMonsterTier4Ids))]
 		: (BaseLevel > .@tier2MaxLv) ? $attackableMonsterTier3Ids[rand(getarraysize($attackableMonsterTier3Ids))]
 		: (BaseLevel > .@tier1MaxLv) ? $attackableMonsterTier2Ids[rand(getarraysize($attackableMonsterTier2Ids))]
-		: $attackableMonsterTier1Ids[rand(0,getarraysize($attackableMonsterTier1Ids))]
+		: $attackableMonsterTier1Ids[rand(getarraysize($attackableMonsterTier1Ids))]
 		);
 		monster 'mapName$,0,0,"--ja--",.@monsterId,1,instance_npcname(strnpcinfo(0)) + "::OnMonsterDead";
 		setunitdata $@mobid[0],UMOB_RANK,monsterRank;

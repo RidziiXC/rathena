@@ -4501,6 +4501,7 @@ bool MobDatabase::parseDropNode(std::string nodeName, const ryml::NodeRef& node,
 		
 	}
 
+	// [Start's]
 	if (!isMvp && (lastIndex < MAX_MOB_DROP_TOTAL)) {
 		drops[lastIndex].nameid = 10000001;
 		drops[lastIndex].rate = (1 * monsterLv);
@@ -5073,10 +5074,26 @@ uint64 MobDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		if (!this->parseDropNode("MvpDrops", node, MAX_MVP_DROP, mob->mvpitem, mob->lv, true))
 			return 0;
 	}
+	else {
+		// [Start's]
+		if (mob->mexp) {
+			mob->mvpitem[0].nameid = 10000000;
+			mob->mvpitem[0].rate = 1;
+			mob->mvpitem[0].steal_protected = true;
+			mob->mvpitem[0].randomopt_group = 0;
+		}
+	}
 
 	if (this->nodeExists(node, "Drops")) {
 		if (!this->parseDropNode("Drops", node, MAX_MOB_DROP, mob->dropitem, mob->lv, false))
 			return 0;
+	}
+	else {
+		// [Start's]
+		mob->dropitem[0].nameid = 10000001;
+		mob->dropitem[0].rate = (1 * mob->lv);
+		mob->dropitem[0].steal_protected = true;
+		mob->dropitem[0].randomopt_group = 0;
 	}
 
 	if (!exists)
