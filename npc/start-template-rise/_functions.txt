@@ -10,7 +10,7 @@ function	script	ApplyTired	{
 
 function	script	IsSkipTickMap	{
 	.@value$ = getarg(0,strcharinfo(3));
-	return ((.@value$ == "prontera") || (.@value$ == "prt_in") || (.@value$ == "s_atelier") || (.@value$ == "prt_church") || (.@value$ == "bossnia_01") || (.@value$ == "bossnia_02") || (.@value$ == "bossnia_03") || (.@value$ == "bossnia_04") || (.@value$ == "pvp_n_1-3") || (.@value$ == "pvp_n_1-5") || (.@value$ == "pvp_n_1-1") || (.@value$ == "guild_vs5") || (.@value$ == "guild_vs4") || (.@value$ == "tra_fild") || (.@value$ == "06guild_01") || (.@value$ == "06guild_02") || (.@value$ == "06guild_03") || (.@value$ == "06guild_04"));
+	return ((.@value$ == "prontera") || (.@value$ == "prt_in") || (.@value$ == "s_atelier") || (.@value$ == "prt_church") || (.@value$ == "bossnia_01") || (.@value$ == "bossnia_02") || (.@value$ == "bossnia_03") || (.@value$ == "bossnia_04") || (.@value$ == "pvp_n_1-3") || (.@value$ == "pvp_n_1-5") || (.@value$ == "pvp_n_1-1") || (.@value$ == "guild_vs5") || (.@value$ == "guild_vs4") || (.@value$ == "guild_vs1") || (.@value$ == "tra_fild") || (.@value$ == "06guild_01") || (.@value$ == "06guild_02") || (.@value$ == "06guild_03") || (.@value$ == "06guild_04"));
 }
 
 function	script	StringBase10000	{

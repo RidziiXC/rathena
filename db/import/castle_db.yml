@@ -38,3 +38,10 @@
 Header:
   Type: CASTLE_DB
   Version: 2
+  
+Body:
+# Mini GvG
+  - Id: 1000
+    Map: guild_vs1
+    Name: Mini GvG
+    Npc: Mini GvG#minigvg
