@@ -8732,11 +8732,11 @@ ACMD_FUNC(fakename)
 			clif_name_area(&sd->bl);
 			if (sd->disguise)
 				clif_name_self(&sd->bl);
-			clif_displaymessage(sd->fd, msg_txt(sd,1307)); // Returned to real name.
+			//clif_displaymessage(sd->fd, msg_txt(sd,1307)); // Returned to real name. // [Start's] Disable message because debuff already hint
 			return 0;
 		}
 
-		clif_displaymessage(sd->fd, msg_txt(sd,1308)); // You must enter a name.
+		//clif_displaymessage(sd->fd, msg_txt(sd,1308)); // You must enter a name. // [Start's] Disable message because debuff already hint
 		return -1;
 	}
 
@@ -8750,7 +8750,7 @@ ACMD_FUNC(fakename)
 	clif_name_area(&sd->bl);
 	if (sd->disguise) // Another packet should be sent so the client updates the name for sd
 		clif_name_self(&sd->bl);
-	clif_displaymessage(sd->fd, msg_txt(sd,1310)); // Fake name enabled.
+	//clif_displaymessage(sd->fd, msg_txt(sd,1310)); // Fake name enabled. // [Start's] Disable message because debuff already hint
 
 	return 0;
 }

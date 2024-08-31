@@ -1,3 +1,18 @@
+function	script	IsInventoryFull	{ return (!checkweight(1490,1)); }
+
+function	script	ApplyTired	{
+	atcommand "@fakename";
+	if(tired)
+	atcommand "@fakename [ล้า " + tired + "%]" + strcharinfo(0);
+	atcommand "@debuff " + tired;
+	return;
+}
+
+function	script	IsSkipTickMap	{
+	.@value$ = getarg(0,strcharinfo(3));
+	return ((.@value$ == "prontera") || (.@value$ == "prt_in") || (.@value$ == "s_atelier") || (.@value$ == "prt_church") || (.@value$ == "bossnia_01") || (.@value$ == "bossnia_02") || (.@value$ == "bossnia_03") || (.@value$ == "bossnia_04") || (.@value$ == "pvp_n_1-3") || (.@value$ == "pvp_n_1-5") || (.@value$ == "pvp_n_1-1") || (.@value$ == "guild_vs5") || (.@value$ == "guild_vs4") || (.@value$ == "tra_fild") || (.@value$ == "06guild_01") || (.@value$ == "06guild_02") || (.@value$ == "06guild_03") || (.@value$ == "06guild_04"));
+}
+
 function	script	StringBase10000	{
 	.@value = getarg(0,0);
 	if(.@value < 10)
@@ -456,5 +471,25 @@ function	script	Storage	{
 			end;
 		}
 	}
+	return;
+}
+
+function	script	MysteryBuffBox	{
+	if(IsInventoryFull()){
+		message strcharinfo(0),"เกิดข้อผิดพลาด: ไม่สามารถแบกของเพิ่มได้อีกแล้ว";
+		return;
+	}
+	getitem $buffIds[rand(getarraysize($buffIds))],1;
+	delitem $mysteryBuffBoxItemId,1;
+	return;
+}
+
+function	script	MysteryPackageBox	{
+	if(IsInventoryFull()){
+		message strcharinfo(0),"เกิดข้อผิดพลาด: ไม่สามารถแบกของเพิ่มได้อีกแล้ว";
+		return;
+	}
+	getitem $itemGroupIds[rand(getarraysize($itemGroupIds))],1;
+	delitem $mysteryPackageBoxItemId,1;
 	return;
 }

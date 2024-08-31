@@ -35,23 +35,13 @@ Header:
 Body:
  - Tab: New
    Items:
-     - Item: Warnut_Chocoball
-       Price: 100
-     - Item: Red_Potion
-       Price: 200
-     - Item: Orange_Potion
-       Price: 300
-     - Item: Yellow_Potion
-       Price: 400
-     - Item: White_Potion
-       Price: 500
-     - Item: Blue_Potion
-       Price: 600
-     - Item: Green_Potion
-       Price: 700
-     - Item: Red_Herb
-       Price: 800
-     - Item: Yellow_Herb
-       Price: 900
-     - Item: White_Herb
-       Price: 1000
+     - Item: Refine_Hack_Powder
+       Price: 1000000
+     - Item: Wishing_Ticket
+       Price: 500000
+     - Item: Rise_Stone
+       Price: 10000
+     - Item: Mystery_Buff_Box
+       Price: 50000
+     - Item: Mystery_Package_Box
+       Price: 100000

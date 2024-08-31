@@ -2,11 +2,36 @@
 	end;
 	
 OnPCLoginEvent:
+	addtimer 10000,strnpcinfo(3) + "::OnPlayTimeTick";
+	if(tired)
+	ApplyTired();
 	if(!isAutoLootOff)
 	autoloot();
 	end;
 	
+OnPlayTimeTick:
+	if(!IsSkipTickMap() && (tired < 100)){
+		ptt++;
+		if(ptt > 60){
+			ptt = 0;
+			tired = cap_value(tired + 10,0,100);
+			tiredSpot = rand(1,16);
+			ApplyTired();
+		}
+	}
+	addtimer 10000,strnpcinfo(3) + "::OnPlayTimeTick";
+	end;
+	
 OnPCLogoutEvent:
+	end;
+	
+OnPCLoadMapEvent:
+	if((strcharinfo(3) == "prontera") && tired){
+		if(!tiredSpot)
+		tiredSpot = rand(1,16);
+		viewpoint 1,$tiredSpotXs[tiredSpot - 1],$tiredSpotYs[tiredSpot - 1],1,0xe88d4e;
+		announce "คุณมีอาการเหนื่อยล้า โปรดพักผ่อนตามจุดที่ระบุใน Minimap",bc_all,0xe88d4e,0,25;
+	}
 	end;
 	
 OnInit:
@@ -19,3 +44,5 @@ OnLoad:
 	warp "Save",0,0;
 	end;
 }
+
+prontera	mapflag	loadevent

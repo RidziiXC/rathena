@@ -2,7 +2,8 @@ prontera,156,188,4	script	ตั้งค่า	84,{
 	L_Menu:
 	menu
 	"ดูคำสั่งที่ใช้ได้",L_Commands,
-	"ใช้ @autoloot เมื่อเข้าเกม [" + (isAutoLootOff ? "^d32323OFF^000000" : "^1c9311ON^000000") + "]",L_AutoLoot
+	"ใช้ @autoloot เมื่อเข้าเกม [" + (isAutoLootOff ? "^d32323OFF^000000" : "^1c9311ON^000000") + "]",L_AutoLoot,
+	"รวม Item ที่แยกกันอยู่",L_ItemMerge
 	;
 	end;
 	
@@ -25,5 +26,9 @@ prontera,156,188,4	script	ตั้งค่า	84,{
 	L_AutoLoot:
 	isAutoLootOff = !isAutoLootOff;
 	message strcharinfo(0),"ใช้ @autoloot เมื่อเข้าเกม [" + (isAutoLootOff ? "OFF" : "ON") + "]";
+	goto L_Menu;
+	
+	L_ItemMerge:
+	mergeitem;
 	goto L_Menu;
 }

@@ -94,8 +94,37 @@ Body:
     Name: Refine Hack Powder
     Type: Etc
     Buy: 1
+    Trade:
+      NoSell: true
   - Id: 10000001
     AegisName: Wishing_Ticket
     Name: Wishing Ticket
     Type: Etc
     Buy: 1
+    Trade:
+      NoSell: true
+  - Id: 10000002
+    AegisName: Rise_Stone
+    Name: Rise Stone
+    Type: Etc
+    Buy: 1
+    Trade:
+      NoSell: true
+  - Id: 10000003
+    AegisName: Mystery_Buff_Box
+    Name: Mystery Buff Box
+    Type: DelayConsume
+    Buy: 1
+    Trade:
+      NoSell: true
+    Script: |
+      callfunc("MysteryBuffBox");
+  - Id: 10000004
+    AegisName: Mystery_Package_Box
+    Name: Mystery Package Box
+    Type: DelayConsume
+    Buy: 1
+    Trade:
+      NoSell: true
+    Script: |
+      callfunc("MysteryPackageBox");

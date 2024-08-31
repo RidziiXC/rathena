@@ -71,3 +71,29 @@ Body:
           - Index: 0
             Item: Elunium_Stone
             Amount: 5
+  - Name: ·≈° Rise Stone
+    Map: prontera
+    X: 147
+    Y: 196
+    Direction: South
+    Sprite: 1_F_MERCHANT_01
+    Items:
+      - Index: 0
+        Item: Token_Of_Siegfried   
+        RequiredItems:
+          - Index: 0
+            Item: Rise_Stone
+            Amount: 15
+      - Index: 1
+        Item: Mystery_Buff_Box   
+        RequiredItems:
+          - Index: 0
+            Item: Rise_Stone
+            Amount: 10
+      - Index: 2
+        Item: Mystery_Package_Box   
+        RequiredItems:
+          - Index: 0
+            Item: Rise_Stone
+            Amount: 30
+

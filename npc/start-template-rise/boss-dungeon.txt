@@ -32,7 +32,7 @@ bossnia_04	mapflag	notomb
 bossnia_04	mapflag	nopetcapture
 bossnia_04	mapflag	pvp
 
--	script	BossDungeon	84,{
+-	script	BossDungeon	-1,{
 	end;
 
 	L_Spawn:

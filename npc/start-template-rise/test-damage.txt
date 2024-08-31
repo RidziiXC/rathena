@@ -1,4 +1,4 @@
--	script	TestDamage	84,{
+-	script	TestDamage	-1,{
 	end;
 
 OnTimer60000:

@@ -40,7 +40,7 @@ ordeal_3-2	mapflag	nomemo
 ordeal_3-2	mapflag	notomb
 ordeal_3-2	mapflag	nopetcapture
 
--	script	MysteryDungeon	84,{
+-	script	MysteryDungeon	-1,{
 	end;
 	
 OnMinute00:
