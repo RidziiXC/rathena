@@ -757,11 +757,11 @@ uint64 ItemDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		}
 	} else {
 		if (!exists) {
-			item->flag.buyingstore = false;
+			//item->flag.buyingstore = false; // [Start's]
 			item->flag.dead_branch = false;
 			item->flag.group = false;
 			item->flag.guid = false;
-			item->flag.bindOnEquip = false;
+			//item->flag.bindOnEquip = false; // [Start's]
 			item->flag.broadcast = false;
 			if (!(item->flag.delay_consume & DELAYCONSUME_TEMP))
 				item->flag.delay_consume = DELAYCONSUME_NONE;
