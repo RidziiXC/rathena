@@ -569,7 +569,10 @@ uint64 ItemDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			item->elvmax = MAX_LEVEL;
 	}
 
-	if (this->nodeExists(node, "Refineable")) {
+	// [Start's]
+	item->flag.no_refine = false;
+
+	/*if (this->nodeExists(node, "Refineable")) {
 		bool refine;
 
 		if (!this->asBool(node, "Refineable", refine))
@@ -579,9 +582,12 @@ uint64 ItemDatabase::parseBodyNode(const ryml::NodeRef& node) {
 	} else {
 		if (!exists)
 			item->flag.no_refine = true;
-	}
+	}*/
 
-	if (this->nodeExists(node, "Gradable")) {
+	// [Start's]
+	item->flag.gradable = true;
+
+	/*if (this->nodeExists(node, "Gradable")) {
 		bool gradable;
 
 		if (!this->asBool(node, "Gradable", gradable))
@@ -591,7 +597,7 @@ uint64 ItemDatabase::parseBodyNode(const ryml::NodeRef& node) {
 	} else {
 		if (!exists)
 			item->flag.gradable = false;
-	}
+	}*/
 
 	if (this->nodeExists(node, "View")) {
 		uint32 look;
@@ -624,10 +630,14 @@ uint64 ItemDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			item->view_id = 0;
 	}
 
+	// [Start's]
+	item->flag.buyingstore = true;
+	item->flag.bindOnEquip = false;
+
 	if (this->nodeExists(node, "Flags")) {
 		const auto& flagNode = node["Flags"];
 
-		if (this->nodeExists(flagNode, "BuyingStore")) {
+		/*if (this->nodeExists(flagNode, "BuyingStore")) {
 			bool active;
 
 			if (!this->asBool(flagNode, "BuyingStore", active))
@@ -642,7 +652,7 @@ uint64 ItemDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		} else {
 			if (!exists)
 				item->flag.buyingstore = false;
-		}
+		}*/
 
 		if (this->nodeExists(flagNode, "DeadBranch")) {
 			bool active;
@@ -685,7 +695,7 @@ uint64 ItemDatabase::parseBodyNode(const ryml::NodeRef& node) {
 				item->flag.guid = false;
 		}
 
-		if (this->nodeExists(flagNode, "BindOnEquip")) {
+		/*if (this->nodeExists(flagNode, "BindOnEquip")) {
 			bool active;
 
 			if (!this->asBool(flagNode, "BindOnEquip", active))
@@ -695,7 +705,7 @@ uint64 ItemDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		} else {
 			if (!exists)
 				item->flag.bindOnEquip = false;
-		}
+		}*/
 
 		if (this->nodeExists(flagNode, "DropAnnounce")) {
 			bool active;
