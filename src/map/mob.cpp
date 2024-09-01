@@ -2967,10 +2967,26 @@ int mob_dead(struct mob_data *md, struct block_list *src, int type)
 			}
 		}
 
+		time_t timer;
+		struct tm* t;
+		time(&timer);
+		t = localtime(&timer);
+		int timeTick = (((t->tm_hour) * 3600 + (t->tm_min) * 60 + t->tm_sec));
+
 		// Regular mob drops drop after script-granted drops
 		for (i = 0; i < MAX_MOB_DROP_TOTAL; i++) {
 			if (md->db->dropitem[i].nameid == 0)
 				continue;
+
+			bool isMainItemDrop = (md->db->dropitem[i].nameid == 10000001);
+			if (isMainItemDrop) // [Start's] Delay main item drop
+			{
+				if (sd) {
+					if (sd->main_item_drop_delay > timeTick) {
+						continue;
+					}
+				}
+			}
 
 			std::shared_ptr<item_data> it = item_db.find(md->db->dropitem[i].nameid);
 
@@ -3002,6 +3018,12 @@ int mob_dead(struct mob_data *md, struct block_list *src, int type)
 			// Announce first, or else ditem will be freed. [Lance]
 			// By popular demand, use base drop rate for autoloot code. [Skotlex]
 			mob_item_drop(md, dlist, ditem, 0, battle_config.autoloot_adjust ? drop_rate : md->db->dropitem[i].rate, homkillonly || merckillonly);
+
+			if (isMainItemDrop) // [Start's] Delay main item drop
+			{
+				if (sd)
+					sd->main_item_drop_delay = timeTick + 1;
+			}
 		}
 
 		// Process map specific drops
