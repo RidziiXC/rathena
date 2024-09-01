@@ -1,0 +1,4 @@
+prontera,144,174,3	script	คลังเก็บของ	10427,{
+	Storage();
+	end;
+}

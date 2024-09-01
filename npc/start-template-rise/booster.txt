@@ -1,4 +1,7 @@
-prontera,156,184,4	script	เร่งแหลก	84,{
+prontera,166,200,6	script	เร่งแหลก	10516,{
+	.@oldInstanceId = instance_id(IM_CHAR);
+	if(.@oldInstanceId)
+	instance_destroy .@oldInstanceId;
 	if(instance_id(IM_CHAR)){
 		mes "โปรดทำลาย Instance Dungeon เก่าเสียก่อน";
 		close;
@@ -56,7 +59,7 @@ guild_vs5	mapflag	nobranch
 guild_vs5	mapflag	notomb
 guild_vs5	mapflag	nopetcapture
 
-guild_vs5,50,60,4	script	เริ่ม#เร่งแหลก	84,{
+guild_vs5,50,60,4	script	เริ่ม#เร่งแหลก	10516,{
 	hideonnpc instance_npcname(strnpcinfo(0));
 	'spawnAmount = 10;
 	.@tier1MaxLv = 30;

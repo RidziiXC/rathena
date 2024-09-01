@@ -16,7 +16,7 @@
 //= 2.0 Added 4th class [Lemongrass]
 //============================================================
 
-prontera,153,193,6	script	Job Master	123,{
+prontera,138,184,8	script	เฟรเซีย	10468,{
 	function Get_Job_Equip;
 	
 	function	Require_Level	{
@@ -378,5 +378,7 @@ OnInit:
 		.BabyExpanded = false;
 		.BabySummoner = false;
 	}
+	
+	waitingroom "เปลี่ยนอาชีพ",0;
 	end;
 }

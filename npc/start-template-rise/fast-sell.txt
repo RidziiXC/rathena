@@ -1,4 +1,4 @@
-prontera,158,188,4	script	ขายของเร็ว	84,{
+prontera,147,159,6	script	ขายของเร็ว	10390,{
 	menu
 	"-",-,
 	"-",-,
@@ -48,5 +48,9 @@ prontera,158,188,4	script	ขายของเร็ว	84,{
 	freeloop(0);
 	if(.@summaryZeny)
 	specialeffect2 18;
+	end;
+	
+OnInit:
+	waitingroom "ขายของเร็ว",0;
 	end;
 }

@@ -1,4 +1,4 @@
-prontera,160,188,4	script	สุ่มรับ Item ตามประเภท	84,{
+prontera,147,171,6	script	ลูกแก้วแห่งความปรารถนา	10308,{
 	.@weaponCost = 25;
 	.@equipmentCost = 5;
 	.@cardCost = 100;
@@ -88,4 +88,8 @@ prontera,160,188,4	script	สุ่มรับ Item ตามประเภท	84,{
 	}
 	freeloop(0);
 	close;
+	
+OnInit:
+	waitingroom "สุ่มรับ Item",0;
+	end;
 }

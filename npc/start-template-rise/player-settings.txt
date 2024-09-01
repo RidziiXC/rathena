@@ -1,4 +1,4 @@
-prontera,156,188,4	script	ตั้งค่า	84,{
+prontera,163,178,1	script	ตั้งค่า	10372,{
 	L_Menu:
 	menu
 	"ดูคำสั่งที่ใช้ได้",L_Commands,
@@ -31,4 +31,8 @@ prontera,156,188,4	script	ตั้งค่า	84,{
 	L_ItemMerge:
 	mergeitem;
 	goto L_Menu;
+	
+OnInit:
+	waitingroom "ตั้งค่า",0;
+	end;
 }

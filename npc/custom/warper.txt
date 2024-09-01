@@ -33,7 +33,7 @@
 	" ~ PvP [^af1ada" + getmapusers("pvp_n_1-3") + " คน^000000]",Pvp,
 	" ~ PvP (Party ได้) [^af1ada" + getmapusers("pvp_n_1-5") + " คน^000000]",PvpParty,
 	" ~ PvP (Guild ได้) [^af1ada" + getmapusers("pvp_n_1-1") + " คน^000000]",PvpGuild,
-	" ~ ปราสาท Guild",Castles,
+	//" ~ ปราสาท Guild",Castles,
 	" ~ Guild Dungeon",Guild_Dungeons,
 	//" ~ Instance",Instances,
 	" ~ สถานที่พิเศษ",Special;
@@ -1398,52 +1398,52 @@ OnInit:
 // --------------------------------------------------
 //	Duplicates:
 // --------------------------------------------------
-alb2trea,57,70,6	duplicate(Warp)	Warp#tre	811
-alberta,28,240,4	duplicate(Warp)	Warp#alb	811
-aldebaran,145,118,4	duplicate(Warp)	Warp#alde	811
-amatsu,203,87,4	duplicate(Warp)	Warp#ama	811
-ayothaya,209,169,6	duplicate(Warp)	Warp#ayo	811
-comodo,194,158,4	duplicate(Warp)	Warp#com	811
-einbech,59,38,6	duplicate(Warp)	Warp#einbe	811
-einbroch,69,202,4	duplicate(Warp)	Warp#einbr	811
-gef_fild10,71,339,4	duplicate(Warp)	Warp#orc	811
-geffen,124,72,4	duplicate(Warp)	Warp#gef	811
-glast_01,372,308,4	duplicate(Warp)	Warp#glh	811
-gonryun,162,122,4	duplicate(Warp)	Warp#gon	811
-hugel,101,151,4	duplicate(Warp)	Warp#hug	811
-izlu2dun,110,92,4	duplicate(Warp)	Warp#izd	811
-izlude,134,150,4	duplicate(Warp)	Warp#izl	811	//Pre-RE: (132,120)
-jawaii,253,138,4	duplicate(Warp)	Warp#jaw	811
-lighthalzen,162,102,4	duplicate(Warp)	Warp#lhz	811
-louyang,208,103,6	duplicate(Warp)	Warp#lou	811
-manuk,274,146,6	duplicate(Warp)	Warp#man	811
-mid_camp,216,288,4	duplicate(Warp)	Warp#mid	811
-mjolnir_02,85,364,4	duplicate(Warp)	Warp#mjo	811
-moc_ruins,64,164,4	duplicate(Warp)	Warp#moc	811
-morocc,159,97,4	duplicate(Warp)	Warp#mor	811
-moscovia,229,191,4	duplicate(Warp)	Warp#mos	811
-nameless_n,259,213,4	duplicate(Warp)	Warp#nam	811
-niflheim,205,179,4	duplicate(Warp)	Warp#nif	811
-pay_arche,42,134,4	duplicate(Warp)	Warp#arc	811
-payon,182,108,4	duplicate(Warp)	Warp#pay	811
-prontera,157,198,4	duplicate(Warp)	Warp#prt	811
-prt_fild05,279,223,6	duplicate(Warp)	Warp#cul	811
-rachel,135,116,4	duplicate(Warp)	Warp#rac	811
-splendide,205,153,4	duplicate(Warp)	Warp#spl	811
-thor_camp,249,76,4	duplicate(Warp)	Warp#thor	811
-umbala,106,150,3	duplicate(Warp)	Warp#umb	811
-veins,214,123,4	duplicate(Warp)	Warp#ve	811
-xmas,150,136,6	duplicate(Warp)	Warp#xmas	811
-yuno,162,47,4	duplicate(Warp)	Warp#yuno	811
+alb2trea,57,70,6	duplicate(Warp)	Warp#tre	10558 
+alberta,28,240,4	duplicate(Warp)	Warp#alb	10558 
+aldebaran,145,118,4	duplicate(Warp)	Warp#alde	10558 
+amatsu,203,87,4	duplicate(Warp)	Warp#ama	10558 
+ayothaya,209,169,6	duplicate(Warp)	Warp#ayo	10558 
+comodo,194,158,4	duplicate(Warp)	Warp#com	10558 
+einbech,59,38,6	duplicate(Warp)	Warp#einbe	10558 
+einbroch,69,202,4	duplicate(Warp)	Warp#einbr	10558 
+gef_fild10,71,339,4	duplicate(Warp)	Warp#orc	10558 
+geffen,124,72,4	duplicate(Warp)	Warp#gef	10558 
+glast_01,372,308,4	duplicate(Warp)	Warp#glh	10558 
+gonryun,162,122,4	duplicate(Warp)	Warp#gon	10558 
+hugel,101,151,4	duplicate(Warp)	Warp#hug	10558 
+izlu2dun,110,92,4	duplicate(Warp)	Warp#izd	10558 
+izlude,134,150,4	duplicate(Warp)	Warp#izl	10558 	//Pre-RE: (132,120)
+jawaii,253,138,4	duplicate(Warp)	Warp#jaw	10558 
+lighthalzen,162,102,4	duplicate(Warp)	Warp#lhz	10558 
+louyang,208,103,6	duplicate(Warp)	Warp#lou	10558 
+manuk,274,146,6	duplicate(Warp)	Warp#man	10558 
+mid_camp,216,288,4	duplicate(Warp)	Warp#mid	10558 
+mjolnir_02,85,364,4	duplicate(Warp)	Warp#mjo	10558 
+moc_ruins,64,164,4	duplicate(Warp)	Warp#moc	10558 
+morocc,159,97,4	duplicate(Warp)	Warp#mor	10558 
+moscovia,229,191,4	duplicate(Warp)	Warp#mos	10558 
+nameless_n,259,213,4	duplicate(Warp)	Warp#nam	10558 
+niflheim,205,179,4	duplicate(Warp)	Warp#nif	10558 
+pay_arche,42,134,4	duplicate(Warp)	Warp#arc	10558 
+payon,182,108,4	duplicate(Warp)	Warp#pay	10558 
+prontera,161,199,4	duplicate(Warp)	Warp#prt	10558 
+prt_fild05,279,223,6	duplicate(Warp)	Warp#cul	10558 
+rachel,135,116,4	duplicate(Warp)	Warp#rac	10558 
+splendide,205,153,4	duplicate(Warp)	Warp#spl	10558 
+thor_camp,249,76,4	duplicate(Warp)	Warp#thor	10558 
+umbala,106,150,3	duplicate(Warp)	Warp#umb	10558 
+veins,214,123,4	duplicate(Warp)	Warp#ve	10558 
+xmas,150,136,6	duplicate(Warp)	Warp#xmas	10558 
+yuno,162,47,4	duplicate(Warp)	Warp#yuno	10558 
 
 // --------------------------------------------------
 //	Duplicates (Renewal):
 // --------------------------------------------------
-brasilis,201,222,4	duplicate(Warp)	Warp#bra	811
-dewata,204,186,6	duplicate(Warp)	Warp#dew	811
-dicastes01,194,194,6	duplicate(Warp)	Warp#dic	811
-ecl_in01,51,60,4	duplicate(Warp)	Warp#ecl	811
-lasagna,196,187,4	duplicate(Warp)	Warp#las	811
-malangdo,134,117,6	duplicate(Warp)	Warp#mal	811
-malaya,231,204,4	duplicate(Warp)	Warp#ma	811
-mora,57,152,4	duplicate(Warp)	Warp#mora	811
+brasilis,201,222,4	duplicate(Warp)	Warp#bra	10558 
+dewata,204,186,6	duplicate(Warp)	Warp#dew	10558 
+dicastes01,194,194,6	duplicate(Warp)	Warp#dic	10558 
+ecl_in01,51,60,4	duplicate(Warp)	Warp#ecl	10558 
+lasagna,196,187,4	duplicate(Warp)	Warp#las	10558 
+malangdo,134,117,6	duplicate(Warp)	Warp#mal	10558 
+malaya,231,204,4	duplicate(Warp)	Warp#ma	10558 
+mora,57,152,4	duplicate(Warp)	Warp#mora	10558 

@@ -1,4 +1,4 @@
-prontera,138,190,4	script	เพิ่งแรงแบกของ	899,{
+prontera,173,160,6	script	ไก	899,{
 	if(gymPassMemory)
 	skill "ALL_INCCARRY",gymPassMemory,SKILL_PERM_GRANT;
 	if(gymPassMemory >= 10){
@@ -37,4 +37,8 @@ prontera,138,190,4	script	เพิ่งแรงแบกของ	899,{
 	}
 	message strcharinfo(0),"ต้องการอีก " + F_InsertComma(.@price - gymPassQuest) + " แต้ม";
 	close;
+	
+	OnInit:
+	waitingroom "เพิ่งแรงแบกของ",0;
+	end;
 }

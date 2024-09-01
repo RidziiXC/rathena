@@ -1,8 +1,3 @@
-prontera,140,190,4	script	คลังเก็บของ	84,{
-	Storage();
-	end;
-}
-
 prontera,142,190,4	script	เติม AP	84,{
 	atcommand "@healap";
 	end;
@@ -37,74 +32,6 @@ prontera,152,190,4	script	ทดสอบช่องเก็บของเต็ม	84,{
 	end;
 }
 
-prontera,154,190,4	script	ทดสอบ Pet & Homun.	84,{
-	menu "ฟัก Poring",-,"เปลี่ยนความสนิทสนม",L_Love,"เปลี่ยนความหิว",L_Food,"เปลี่ยนความสนิทสนม Homunculus",L_HomunLove,"เปลี่ยนความหิว Homunculus",L_HomunFood,"เปลี่ยน Level Homunculus",L_HomunLv,"Evolution Homunculus",L_HomunEvo,"Mutation Homunculus",L_HomunMutation;
-	makepet 1002;
-	sleep2 1;
-	birthpet;
-	end;
-	
-	L_Love:
-	input .@i;
-	atcommand "@petfriendly " + .@i;
-	end;
-	
-	L_Food:
-	input .@i;
-	atcommand "@pethungry " + .@i;
-	end;
-	
-	L_HomunLove:
-	input .@i;
-	atcommand "@homfriendly " + .@i;
-	end;
-	
-	L_HomunFood:
-	input .@i;
-	atcommand "@homhungry " + .@i;
-	end;
-	
-	L_HomunLv:
-	input .@i;
-	atcommand "@homlevel +" + .@i;
-	end;
-	
-	L_HomunEvo:
-	homevolution;
-	end;
-	
-	L_HomunMutation:
-	if(gethominfo(6) < 99)
-	end;
-	switch(select("Eira:Sera:Dieter:Bayeri:Eleanor")) {
-	case 1:
-		cutin "Mer_Eira_Card",3;
-		.@id = 6048;
-		break;
-	case 2:
-		cutin "Mer_Sera_Card",3;
-		.@id = 6050;
-		break;
-	case 3:
-		cutin "Mer_Dieter_Card",3;
-		.@id = 6051;
-		break;
-	case 4:
-		cutin "Mer_Bayeri_Card",3;
-		.@id = 6049;
-		break;
-	case 5:
-		cutin "Mer_Eleanor_Card",3;
-		.@id = 6052;
-		break;
-	}
-	menu "เลือกใหม่",L_HomunMutation,"ยืนยัน",-;
-	cutin "",255;
-	morphembryo;
-	hommutate .@id;
-	end;
-}
-
 prontera,156,190,4	script	ทดสอบอาชีพ	84,{
 	input .@i;
 	atcommand "@job " + .@i;
@@ -114,32 +41,6 @@ prontera,156,190,4	script	ทดสอบอาชีพ	84,{
 	atcommand "@traitall";
 	atcommand "@skillall";
 	callfunc "F_GetPlatinumSkills";
-	end;
-}
-
-prontera,158,190,4	script	เสริมแกร่ง	84,{
-	menu
-	"เสริมแกร่ง",-
-	,"เสริมแกร่งด้วย Random Option",L_RandomOption
-	,"เสริมแกร่งด้วย Grade",L_Grade
-	,"นำ Card & Enchantment ออกจากช่องอุปกรณ์",L_SlotRemover
-	;
-	mes "หากการเสริมแกร่ง^d32323ไม่สำเร็จ^000000";
-	mes "• มีโอกาส 10% ที่ ^d32323Item จะหายไป^000000";
-	mes "• นอกนั้นจำนวนเสริมแกร่งจะลดลง 1";
-	refineui;
-	close;
-	
-	L_RandomOption:
-	RandomOption();
-	end;
-	
-	L_Grade:
-	EnchantGrade();
-	end;
-	
-	L_SlotRemover:
-	SlotRemover();
 	end;
 }
 
@@ -190,5 +91,17 @@ prontera,162,180,4	script	เช็ค Item Bug	84,{
 	}
 	
 	freeloop(0);
+	end;
+}
+
+prontera,164,188,4	script	เช็ค Item เด้ง	84,{
+	errorItemIdPage++;
+	dispbottom "หน้าที่ " + errorItemIdPage;
+	.@shopName$ = "ItemMall" + errorItemIdPage;
+	callshop .@shopName$,1;
+	npcshopattach .@shopName$;
+	end;
+	
+OnBuyItem:
 	end;
 }

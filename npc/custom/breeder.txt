@@ -10,7 +10,7 @@
 //= One-click automatic mount rentals.
 //============================================================
 
-prontera,145,201,3	script	รับอุปกรณ์อาชีพ	726,{
+prontera,134,188,8	script	แมกนัส	10573,{
 	if (ismounting()) {
 		message strcharinfo(0),"เกิดข้อผิดพลาด: ถอดอุปกรณ์เก่าทุกอย่างออกก่อน";
 		end;
@@ -35,5 +35,9 @@ prontera,145,201,3	script	รับอุปกรณ์อาชีพ	726,{
 		end;
 	}
 	specialeffect2 EF_TEIHIT3;
+	end;
+	
+OnInit:
+	waitingroom "รับอุปกรณ์อาชีพ",0;
 	end;
 }

@@ -1,4 +1,7 @@
-prontera,156,180,4	script	สนามรบจำลอง	84,{
+prontera,166,207,8	script	สนามรบจำลอง	10547,{
+	.@oldInstanceId = instance_id(IM_CHAR);
+	if(.@oldInstanceId)
+	instance_destroy .@oldInstanceId;
 	if(instance_id(IM_CHAR)){
 		mes "โปรดทำลาย Instance Dungeon เก่าเสียก่อน";
 		close;
@@ -42,7 +45,7 @@ guild_vs4	mapflag	nobranch
 guild_vs4	mapflag	notomb
 guild_vs4	mapflag	nopetcapture
 
-guild_vs4,50,60,4	script	เริ่ม#สนามรบจำลอง	84,{
+guild_vs4,50,60,4	script	เริ่ม#สนามรบจำลอง	10547,{
 	hideonnpc instance_npcname(strnpcinfo(0));
 	'spawnAmount = 30;
 	callsub L_Spawn;

@@ -13,7 +13,7 @@
 //= 1.1 Switched to 'getbattleflag', credits to Saithis. [Euphy]
 //============================================================
 
-prontera,170,180,1	script	Stylist#custom_stylist	122,{
+prontera,174,177,3	script	เกรส	10365,{
 	.@isSummoner = (eaclass() == EAJ_SUMMONER);
 	setarray .@maxStyles[1],getbattleflag("max_cloth_color"),getbattleflag("max_hair_style"),getbattleflag("max_hair_color");
 	setarray .@looks[1],LOOK_CLOTHES_COLOR,LOOK_HAIR,LOOK_HAIR_COLOR;
@@ -59,4 +59,8 @@ prontera,170,180,1	script	Stylist#custom_stylist	122,{
 			break;
 		}
 	}
+	
+OnInit:
+	waitingroom "แต่งตัว",0;
+	end;
 }

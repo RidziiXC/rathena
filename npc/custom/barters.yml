@@ -48,10 +48,10 @@ Header:
 Body:
   - Name: วัตถุดิบเสริมแกร่ง
     Map: prontera
-    X: 160
-    Y: 190
-    Direction: South
-    Sprite: 1_F_MERCHANT_01
+    X: 139
+    Y: 156
+    Direction: SouthEast
+    Sprite: 4_STEELBOX
     Items:
       - Index: 0
         Item: Phracon   
@@ -73,10 +73,10 @@ Body:
             Amount: 5
   - Name: แลก Rise Stone
     Map: prontera
-    X: 147
-    Y: 196
-    Direction: South
-    Sprite: 1_F_MERCHANT_01
+    X: 145
+    Y: 200
+    Direction: SouthWest
+    Sprite: 4_GACHA_MACHINE
     Items:
       - Index: 0
         Item: Token_Of_Siegfried   
