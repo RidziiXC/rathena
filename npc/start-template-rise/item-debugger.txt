@@ -503,6 +503,10 @@ prontera,147,168,6	script	เช็ค Item	10359,{
 	mes "ต้องการดูหน้าไหน?";
 	mes "1~" + .@maxPage;
 	input .@i;
+	if((.@i <= 0) || (.@i > .@maxPage)){
+		mes "ยกเลิกเรียบร้อยแล้ว";
+		close;
+	}
 	.@shopName$ = .@variableName$ + .@i;
 	callshop .@shopName$,1;
 	npcshopattach .@shopName$;
