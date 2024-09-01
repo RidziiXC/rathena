@@ -30,7 +30,7 @@ OnPCLoadMapEvent:
 		if(!tiredSpot)
 		tiredSpot = rand(1,16);
 		viewpoint 1,$tiredSpotXs[tiredSpot - 1],$tiredSpotYs[tiredSpot - 1],1,0xe88d4e;
-		announce "คุณมีอาการเหนื่อยล้า โปรดพักผ่อนตามจุดที่ระบุใน Minimap",bc_all,0xe88d4e,0,25;
+		announce "คุณมีอาการเหนื่อยล้า โปรดพักผ่อนตามจุดที่ระบุใน Minimap",bc_self,0xe88d4e,0,25;
 	}
 	end;
 	
