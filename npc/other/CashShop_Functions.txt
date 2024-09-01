@@ -35,7 +35,7 @@
 // - Open player's storage.
 // - No arguments.
 function	script	F_CashStore	{
-	Storage();
+	callfunc("Storage");
 	return;
 	cutin "kafra_01",2;
 	mes "[Kafra Employee]";
