@@ -96,4 +96,10 @@ Body:
           - Index: 0
             Item: Rise_Stone
             Amount: 30
+      - Index: 3
+        Item: Kafra_Card   
+        RequiredItems:
+          - Index: 0
+            Item: Rise_Stone
+            Amount: 3
 
