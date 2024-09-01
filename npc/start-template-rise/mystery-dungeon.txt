@@ -111,6 +111,6 @@ OnInit:
 	setarray $mysteryDungeonMapName$[0],"ordeal_1-1","ordeal_1-2","ordeal_2-1","ordeal_2-2","ordeal_3-1","ordeal_3-2";
 	callsub L_RefreshMonsterId;
 	for(.i = 0; .i < getarraysize($mysteryDungeonMapName$); .i++)
-	callsub L_Spawn,.@i,$mysteryDungeonSpawnAmount;
+	callsub L_Spawn,.i,$mysteryDungeonSpawnAmount;
 	end;
 }
