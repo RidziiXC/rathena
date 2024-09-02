@@ -4676,6 +4676,7 @@
 	export_constant(MOB_RANGE3);
 	export_constant(MOB_SIZE);
 	export_constant(MOB_RACE);
+	export_constant(MOB_CLASS);
 	export_constant(MOB_ELEMENT);
 	export_constant(MOB_MODE);
 	export_constant(MOB_MVPEXP);

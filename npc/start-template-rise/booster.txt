@@ -76,7 +76,7 @@ guild_vs5,50,60,4	script	เริ่ม#เร่งแหลก	10516,{
 	.@tier5MaxLv = 200;
 	freeloop(1);
 	for(.@i = 0; .@i < 'spawnAmount; .@i++){
-		while(!.@monsterId || getmonsterinfo(.@monsterId,MOB_MVPEXP))
+		while(!.@monsterId || getmonsterinfo(.@monsterId,MOB_MVPEXP) || (getmonsterinfo(.@monsterId,MOB_MODE) != 0))
 		.@monsterId = (
 		(BaseLevel > .@tier5MaxLv) ? $attackableMonsterTier6Ids[rand(getarraysize($attackableMonsterTier6Ids))]
 		: (BaseLevel > .@tier4MaxLv) ? $attackableMonsterTier5Ids[rand(getarraysize($attackableMonsterTier5Ids))]
