@@ -17,6 +17,7 @@
 	specialeffect2 77;
 	tired = 0;
 	tiredSpot = 0;
+	ptt = 0;
 	ApplyTired();
 	end;
 }
