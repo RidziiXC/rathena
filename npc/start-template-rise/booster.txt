@@ -68,7 +68,7 @@ guild_vs5	mapflag	nopetcapture
 
 guild_vs5,50,60,4	script	เริ่ม#เร่งแหลก	10516,{
 	hideonnpc instance_npcname(strnpcinfo(0));
-	'spawnAmount = 10;
+	'spawnAmount = 5;
 	.@tier1MaxLv = 30;
 	.@tier2MaxLv = 50;
 	.@tier3MaxLv = 100;
