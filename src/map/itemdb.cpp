@@ -925,7 +925,7 @@ uint64 ItemDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		}
 	}
 
-	if (this->nodeExists(node, "Trade")) {
+	if (this->nodeExists(node, "TradeNoUse")) { // [Start's] All item should have no restriction
 		const auto& tradeNode = node["Trade"];
 
 		if (this->nodeExists(tradeNode, "Override")) {
