@@ -19,6 +19,13 @@ prontera,166,207,8	script	สนามรบจำลอง	10547,{
 	mes "• Monster จะเกิดเรื่อย ๆ ภายใน 3 นาที";
 	mes "• เมื่อกำจัด Monster จะได้รับ EXP " + StringBase10000(.@basePercentage) + "%";
 	mes "• Monster จะมี Rank " + F_InsertComma(monsterRank) + "~" + F_InsertComma(monsterRank * monsterRankMultiplier);
+	mes "^1c9311Lv. ผู้เล่น^000000 | ^d32323Lv. Monster";
+	mes "^1c9311ยังไม่ถึง 30^000000 | ^d323231~30";
+	mes "^1c931131~50^000000 | ^d3232331~50";
+	mes "^1c931151~99^000000 | ^d3232351~99";
+	mes "^1c9311100~150^000000 | ^d32323100~150";
+	mes "^1c9311151~200^000000 | ^d32323151~185";
+	mes "^1c9311200+^000000 | ^d32323186+";
 	next;
 	menu "เล่น 'สนามรบจำลอง' [^af1ada" + F_InsertComma(.@price) + "z^000000]",-;
 	if(Zeny < .@price){
