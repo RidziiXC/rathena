@@ -89,6 +89,72 @@ Header:
   Version: 3
 
 Body:
+  - Id: 1599
+    AegisName: Angra_Manyu
+    Name: Angra Manyu
+    Type: Weapon
+    SubType: Mace
+    Buy: 1
+    Weight: 1
+    Attack: 1
+    MagicAttack: 1
+    Range: 1
+    Locations:
+      Right_Hand: true
+    WeaponLevel: 1
+    EquipLevelMin: 1
+    Refineable: true
+    Script: |
+      bonus bAllStats,1;
+  - Id: 2199
+    AegisName: Ahura_Mazda
+    Name: Ahura Mazdah
+    Type: Armor
+    Buy: 1
+    Weight: 1
+    Locations:
+      Left_Hand: true
+    ArmorLevel: 1
+    EquipLevelMin: 1
+    Refineable: true
+    View: 1
+    Script: |
+      bonus bAllStats,1;
+  - Id: 15065
+    AegisName: AmeshaSpenta
+    Name: Amesha Spenta
+    Type: Armor
+    Locations:
+      Armor: true
+    ArmorLevel: 1
+    Refineable: true
+    Script: |
+      bonus bAllStats,1;
+  - Id: 2904
+    AegisName: Naqsh
+    Name: Naqsi
+    Type: Armor
+    Locations:
+      Both_Accessory: true
+    ArmorLevel: 1
+    Script: |
+      bonus bAllStats,1;
+  - Id: 19429
+    AegisName: Zarathustra
+    Name: Zarathustra
+    Type: Armor
+    Locations:
+      Head_Low: true
+    ArmorLevel: 1
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      bonus bAllStats,1;
   - Id: 10000000
     AegisName: Refine_Hack_Powder
     Name: Refine Hack Powder
