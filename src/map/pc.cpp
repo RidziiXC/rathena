@@ -5505,8 +5505,14 @@ int pc_insert_card(map_session_data* sd, int idx_card, int idx_equip)
 		return 0; // target item missing
 	if( sd->inventory.u.items_inventory[idx_card].nameid == 0 || sd->inventory.u.items_inventory[idx_card].amount < 1 )
 		return 0; // target card missing
-	if( item_eq->type != IT_WEAPON && item_eq->type != IT_ARMOR )
-		return 0; // only weapons and armor are allowed
+	if (!isEnchantment) {
+		if ((item_eq->type != IT_WEAPON) && (item_eq->type != IT_ARMOR))
+			return 0; // only weapons and armor are allowed
+	}
+	else {
+		if ((item_eq->type != IT_WEAPON) && (item_eq->type != IT_ARMOR) && (item_eq->type != IT_SHADOWGEAR))
+			return 0; // only weapons and armor are allowed
+	}
 	if( item_card->type != IT_CARD )
 		return 0; // must be a card
 	if( sd->inventory.u.items_inventory[idx_equip].identify == 0 )

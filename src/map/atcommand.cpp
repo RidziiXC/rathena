@@ -8742,7 +8742,7 @@ ACMD_FUNC(fakename)
 
 	if( strlen(message) < 2 )
 	{
-		clif_displaymessage(sd->fd, msg_txt(sd,1309)); // Fake name must be at least two characters.
+		//clif_displaymessage(sd->fd, msg_txt(sd,1309)); // Fake name must be at least two characters. // [Start's] Disable message because debuff already hint
 		return -1;
 	}
 
