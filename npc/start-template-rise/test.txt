@@ -1,3 +1,17 @@
+prontera,140,190,4	script	เทส Monster เด้ง	84,{
+	menu "ต่อไป",-;
+	.@loop = 10;
+	if(!.index)
+	.index = 270;
+	while(.@loop > 0){
+		.@loop--;
+		debugmes "$attackableMonsterTier4Ids[" + .index + "]:" + $attackableMonsterTier4Ids[.index];
+		monster "prontera",148,186,"--ja--",$attackableMonsterTier4Ids[.index],1;
+		.index++;
+	}
+	end;
+}
+
 prontera,142,190,4	script	เติม AP	84,{
 	atcommand "@healap";
 	end;

@@ -48,6 +48,12 @@ Body:
     Sprite: HORNET
   - Mob: M_HORNET2
     Sprite: HORNET
+  - Mob: M_ANOPHELES
+    Sprite: ANOPHELES
+  - Mob: M_LUCIOLA_VESPA
+    Sprite: LUCIOLA_VESPA
+  - Mob: M_LUCIOLA_VESPA2
+    Sprite: LUCIOLA_VESPA
 
 #  - Mob: PORING
 #    Sprite: BAPHOMET
