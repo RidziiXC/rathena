@@ -383,6 +383,7 @@ enum monsterinfo_types {
 	MOB_MODE,
 	MOB_MVPEXP,
 	MOB_ID,
+	MOB_CLASS,
 };
 
 enum petinfo_types {

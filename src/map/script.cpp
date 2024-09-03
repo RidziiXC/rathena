@@ -18532,6 +18532,7 @@ BUILDIN_FUNC(getmonsterinfo)
 		case MOB_RANGE3:	script_pushint(st,mob->range3); break;
 		case MOB_SIZE:		script_pushint(st,mob->status.size); break;
 		case MOB_RACE:		script_pushint(st,mob->status.race); break;
+		case MOB_CLASS:		script_pushint(st,mob->status.class_); break;
 		case MOB_ELEMENT:	script_pushint(st,mob->status.def_ele); break;
 		case MOB_MODE:		script_pushint(st,mob->status.mode); break;
 		case MOB_MVPEXP:	script_pushint(st,mob->mexp); break;

@@ -1,4 +1,4 @@
-function	script	IsInventoryFull	{ return (!checkweight(1490,1)); }
+function	script	IsInventoryFull	{ return (!checkweight(1100,1)); }
 
 function	script	ApplyTired	{
 	atcommand "@fakename";
