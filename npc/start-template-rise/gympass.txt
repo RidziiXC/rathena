@@ -5,7 +5,7 @@ prontera,173,160,6	script	ไก	899,{
 		message strcharinfo(0),"เกิดข้อผิดพลาด: Level เพิ่มแรงแบกของ สูงสุดแล้ว";
 		end;
 	}
-	.@price = (500 * (1 + gymPassMemory));
+	.@price = (250 * (1 + gymPassMemory));
 	setarray .@questItemId[0],953,7004,7096,7189,7067,6693;
 	setarray .@questPoints[0],1,2,2,2,3,3;
 	mes "ระบบจะแลกของที่เพิ่มแต้มน้อยที่สุดก่อน";
