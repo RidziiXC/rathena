@@ -35,8 +35,8 @@ Header:
 Body:
  - Tab: New
    Items:
-     - Item: Refine_Hack_Powder
-       Price: 1000000
+     - Item: Wing_Of_Butterfly
+       Price: 0
      - Item: Wishing_Ticket
        Price: 500000
      - Item: Rise_Stone
