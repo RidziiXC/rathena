@@ -74,8 +74,9 @@ MysteryDungeons:
 BossDungeons:
 	.@costItemId = $wishingTicketItemId;
 	.@cost = 10;
+	setarray .@baseMonsterRank[0],2500,10000,25000,50000;
 	for(.@i = 0; .@i < getarraysize($bossDungeonMapName$); .@i++){
-		mes "^1c9311ห้องที " + (.@i + 1) + "^000000 Monster จะมี Rank " + F_InsertComma(10000 * (.@i + 1));
+		mes "^1c9311ห้องที " + (.@i + 1) + "^000000 Monster จะมี Rank " + F_InsertComma(.@baseMonsterRank[.@i]);
 		.@bossDungeonMenu$ += " ~ ห้องที่ " + (.@i + 1) + " [^af1ada" + getitemname(.@costItemId) + " " + F_InsertComma(.@cost) + " ชิ้น^000000] (PvP - " + ((.@i < 2) ? "^d32323OFF^000000" : "^1c9311ON^000000") + "):";
 	}
 	next;
