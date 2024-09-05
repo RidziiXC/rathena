@@ -8,7 +8,7 @@ prontera,166,207,8	script	สนามรบจำลอง	10547,{
 	}
 	.@basePrice = 10000;
 	.@basePercentage = 1;
-	.@baseMonsterRank = 10000;
+	.@baseMonsterRank = 2000;
 	.@maxMonsterRankMultiplier = 5;
 	
 	.@price = (BaseLevel * .@basePrice);

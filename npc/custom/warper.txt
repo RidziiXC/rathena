@@ -53,6 +53,9 @@ TestDamage:
 MysteryDungeons:
 	.@costItemId = $wishingTicketItemId;
 	.@cost = 1;
+	mes "Boss ¨Ð Drop " + mesitemlink($riseStoneItemId,true) + " (100%)";
+	mes "Monster ¨Ð Drop " + mesitemlink($riseStoneItemId,true) + " (1%)";
+	mes " ";
 	for(.@i = 0; .@i < getarraysize($mysteryDungeonMapName$); .@i++){
 		setarray .@monsterIds[0],getd("$mysteryDungeonMID" + .@i + "[0]"),getd("$mysteryDungeonMID" + .@i + "[1]"),getd("$mysteryDungeonMID" + .@i + "[2]"),getd("$mysteryDungeonMID" + .@i + "[3]");
 		setarray .@monsterNames$[0],"^d8601b" + getmonsterinfo(.@monsterIds[0],MOB_NAME) + "^000000","^d8601b" + getmonsterinfo(.@monsterIds[1],MOB_NAME) + "^000000","^d8601b" + getmonsterinfo(.@monsterIds[2],MOB_NAME) + "^000000","^d8601b" + getmonsterinfo(.@monsterIds[3],MOB_NAME) + "^000000";
