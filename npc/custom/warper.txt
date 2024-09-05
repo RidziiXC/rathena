@@ -53,6 +53,9 @@ TestDamage:
 MysteryDungeons:
 	.@costItemId = $wishingTicketItemId;
 	.@cost = 1;
+	mes "Boss จะ Drop " + mesitemlink($riseStoneItemId,true) + " (100%)";
+	mes "Monster จะ Drop " + mesitemlink($riseStoneItemId,true) + " (1%)";
+	mes " ";
 	for(.@i = 0; .@i < getarraysize($mysteryDungeonMapName$); .@i++){
 		setarray .@monsterIds[0],getd("$mysteryDungeonMID" + .@i + "[0]"),getd("$mysteryDungeonMID" + .@i + "[1]"),getd("$mysteryDungeonMID" + .@i + "[2]"),getd("$mysteryDungeonMID" + .@i + "[3]");
 		setarray .@monsterNames$[0],"^d8601b" + getmonsterinfo(.@monsterIds[0],MOB_NAME) + "^000000","^d8601b" + getmonsterinfo(.@monsterIds[1],MOB_NAME) + "^000000","^d8601b" + getmonsterinfo(.@monsterIds[2],MOB_NAME) + "^000000","^d8601b" + getmonsterinfo(.@monsterIds[3],MOB_NAME) + "^000000";
@@ -74,8 +77,9 @@ MysteryDungeons:
 BossDungeons:
 	.@costItemId = $wishingTicketItemId;
 	.@cost = 10;
+	setarray .@baseMonsterRank[0],2500,10000,25000,50000;
 	for(.@i = 0; .@i < getarraysize($bossDungeonMapName$); .@i++){
-		mes "^1c9311ห้องที " + (.@i + 1) + "^000000 Monster จะมี Rank " + F_InsertComma(10000 * (.@i + 1));
+		mes "^1c9311ห้องที " + (.@i + 1) + "^000000 Monster จะมี Rank " + F_InsertComma(.@baseMonsterRank[.@i]);
 		.@bossDungeonMenu$ += " ~ ห้องที่ " + (.@i + 1) + " [^af1ada" + getitemname(.@costItemId) + " " + F_InsertComma(.@cost) + " ชิ้น^000000] (PvP - " + ((.@i < 2) ? "^d32323OFF^000000" : "^1c9311ON^000000") + "):";
 	}
 	next;

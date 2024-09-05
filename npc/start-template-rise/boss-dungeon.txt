@@ -38,11 +38,11 @@ bossnia_04	mapflag	pvp
 	L_Spawn:
 	.@index = getarg(0,0);
 	.@amount = getarg(1,0);
-	.@baseMonsterRank = 10000;
+	setarray .@baseMonsterRank[0],2500,10000,25000,50000;
 	freeloop(1);
 	for(.@i = 0; .@i < .@amount; .@i++){
 		monster $bossDungeonMapName$[.@index],0,0,"--ja--",$mvpIds[rand(getarraysize($mvpIds))],1,strnpcinfo(0) + "::OnBossDead" + .@index;
-		setunitdata $@mobid[0],UMOB_RANK,.@baseMonsterRank * (.@index + 1);
+		setunitdata $@mobid[0],UMOB_RANK,.@baseMonsterRank[.@index];
 	}
 	freeloop(0);
 	return;
