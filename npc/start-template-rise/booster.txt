@@ -119,6 +119,9 @@ OnMonsterDead:
 		
 OnComplete:
 		warp "Save",0,0;
+		.@oldInstanceId = instance_id(IM_CHAR);
+		if(.@oldInstanceId)
+		instance_destroy .@oldInstanceId;
 		end;
 		
 OnInstanceInit:

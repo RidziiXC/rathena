@@ -69,6 +69,12 @@ OnMinute50:
 	end;
 	return;
 
+	L_RisePoint:
+	.@isBoss = getarg(0,0);
+	if(rand(100) < (.@isBoss ? 100 : 1))
+	getitem $riseStoneItemId,1;
+	return;
+	
 	L_Spawn:
 	.@index = getarg(0,0);
 	.@amount = getarg(1,0);
@@ -84,26 +90,26 @@ OnMinute50:
 	monster $mysteryDungeonMapName$[.@index],0,0,"--ja--",getd("$mysteryDungeonMVP" + .@index),1,strnpcinfo(0) + "::OnBossDead" + .@index;
 	return;
 
-OnMonsterDead0: callsub L_Spawn,0,1,1,0; end;
-OnBossDead0: $isMysteryDungeonBossDead0 = 1; end;
-OnMonsterDead1: callsub L_Spawn,1,1,1,0; end;
-OnBossDead1: $isMysteryDungeonBossDead1 = 1; end;
-OnMonsterDead2: callsub L_Spawn,2,1,1,0; end;
-OnBossDead2: $isMysteryDungeonBossDead2 = 1; end;
-OnMonsterDead3: callsub L_Spawn,3,1,1,0; end;
-OnBossDead3: $isMysteryDungeonBossDead3 = 1; end;
-OnMonsterDead4: callsub L_Spawn,4,1,1,0; end;
-OnBossDead4: $isMysteryDungeonBossDead4 = 1; end;
-OnMonsterDead5: callsub L_Spawn,5,1,1,0; end;
-OnBossDead5: $isMysteryDungeonBossDead5 = 1; end;
-OnMonsterDead6: callsub L_Spawn,6,1,1,0; end;
-OnBossDead6: $isMysteryDungeonBossDead6 = 1; end;
-OnMonsterDead7: callsub L_Spawn,7,1,1,0; end;
-OnBossDead7: $isMysteryDungeonBossDead7 = 1; end;
-OnMonsterDead8: callsub L_Spawn,8,1,1,0; end;
-OnBossDead8: $isMysteryDungeonBossDead8 = 1; end;
-OnMonsterDead9: callsub L_Spawn,9,1,1,0; end;
-OnBossDead9: $isMysteryDungeonBossDead9 = 1; end;
+OnMonsterDead0: callsub L_RisePoint,0; callsub L_Spawn,0,1,1,0; end;
+OnBossDead0: callsub L_RisePoint,1; $isMysteryDungeonBossDead0 = 1; end;
+OnMonsterDead1: callsub L_RisePoint,0; callsub L_Spawn,1,1,1,0; end;
+OnBossDead1: callsub L_RisePoint,1; $isMysteryDungeonBossDead1 = 1; end;
+OnMonsterDead2: callsub L_RisePoint,0; callsub L_Spawn,2,1,1,0; end;
+OnBossDead2: callsub L_RisePoint,1; $isMysteryDungeonBossDead2 = 1; end;
+OnMonsterDead3: callsub L_RisePoint,0; callsub L_Spawn,3,1,1,0; end;
+OnBossDead3: callsub L_RisePoint,1; $isMysteryDungeonBossDead3 = 1; end;
+OnMonsterDead4: callsub L_RisePoint,0; callsub L_Spawn,4,1,1,0; end;
+OnBossDead4: callsub L_RisePoint,1; $isMysteryDungeonBossDead4 = 1; end;
+OnMonsterDead5: callsub L_RisePoint,0; callsub L_Spawn,5,1,1,0; end;
+OnBossDead5: callsub L_RisePoint,1; $isMysteryDungeonBossDead5 = 1; end;
+OnMonsterDead6: callsub L_RisePoint,0; callsub L_Spawn,6,1,1,0; end;
+OnBossDead6: callsub L_RisePoint,1; $isMysteryDungeonBossDead6 = 1; end;
+OnMonsterDead7: callsub L_RisePoint,0; callsub L_Spawn,7,1,1,0; end;
+OnBossDead7: callsub L_RisePoint,1; $isMysteryDungeonBossDead7 = 1; end;
+OnMonsterDead8: callsub L_RisePoint,0; callsub L_Spawn,8,1,1,0; end;
+OnBossDead8: callsub L_RisePoint,1; $isMysteryDungeonBossDead8 = 1; end;
+OnMonsterDead9: callsub L_RisePoint,0; callsub L_Spawn,9,1,1,0; end;
+OnBossDead9: callsub L_RisePoint,1; $isMysteryDungeonBossDead9 = 1; end;
 
 OnInit:
 	$mysteryDungeonSpawnAmount = 150;
